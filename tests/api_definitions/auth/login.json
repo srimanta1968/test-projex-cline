@@ -1,0 +1,31 @@
+{
+  "endpoint": "/api/auth/login",
+  "method": "POST",
+  "description": "Authenticate user and return JWT token",
+  "requiresAuth": false,
+  "tags": ["auth", "login"],
+  "testCases": [
+    {
+      "name": "Happy path - successful login",
+      "payload": {
+        "email": "user@example.com",
+        "password": "SecurePass123!"
+      },
+      "expectedStatus": 200,
+      "expectedResponse": {
+        "success": true,
+        "message": "Login successful",
+        "data": {
+          "user": {
+            "id": "123e4567-e89b-12d3-a456-426614174000",
+            "email": "user@example.com",
+            "username": "johndoe",
+            "first_name": "John",
+            "last_name": "Doe"
+          },
+          "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+        }
+      }
+    }
+  ]
+}

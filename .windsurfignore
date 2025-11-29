@@ -1,0 +1,45 @@
+# Cline - Ignore File
+# Excludes sensitive and unnecessary files from AI context
+
+# Environment and secrets
+.env
+.env.local
+.env.*.local
+*.pem
+*.key
+id_rsa*
+*.p12
+*.pfx
+
+# Dependencies
+node_modules/
+vendor/
+.pnp.*
+
+# Build outputs
+dist/
+build/
+out/
+*.min.js
+*.min.css
+
+# Logs and databases
+*.log
+*.sql
+*.sqlite
+*.db
+
+# OS and IDE
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+.vscode/
+.idea/
+
+# Large media
+*.mp4
+*.mov
+*.avi
+*.zip
+*.tar.gz

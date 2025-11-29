@@ -1,0 +1,24 @@
+{
+  "endpoint": "/api/auth/me",
+  "method": "GET",
+  "description": "Get current user profile information",
+  "requiresAuth": true,
+  "tags": ["auth", "profile"],
+  "testCases": [
+    {
+      "name": "Happy path - get profile with valid token",
+      "expectedStatus": 200,
+      "expectedResponse": {
+        "success": true,
+        "data": {
+          "id": "123e4567-e89b-12d3-a456-426614174000",
+          "email": "user@example.com",
+          "username": "johndoe",
+          "first_name": "John",
+          "last_name": "Doe",
+          "created_at": "2024-01-15T10:30:00Z"
+        }
+      }
+    }
+  ]
+}
