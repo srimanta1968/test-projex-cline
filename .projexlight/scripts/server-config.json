@@ -2,7 +2,7 @@
   "project_type": "node",
   "framework": "Express.js",
   "language": "javascript",
-  "server_port": 3000,
+  "server_port": 5000,
   "health_endpoint": "/health",
   "install_command": "npm install",
   "build_command": "",
