@@ -6,6 +6,7 @@ import { testConnection } from './config/database';
 dotenv.config();
 
 const PORT = process.env.PORT || 5000;
+const HOST = process.env.HOST || '0.0.0.0'; // Listen on all interfaces for Docker connectivity
 
 // Test database connection before starting server
 const initializeServer = async () => {
@@ -19,9 +20,9 @@ const initializeServer = async () => {
       process.exit(1);
     }
 
-    // Start server
-    const server = app.listen(PORT, () => {
-      console.log(`🚀 Rider App server running on port ${PORT}`);
+    // Start server on all interfaces (required for Docker MCP server connectivity)
+    const server = app.listen(Number(PORT), HOST, () => {
+      console.log(`🚀 Rider App server running on ${HOST}:${PORT}`);
       console.log(`📊 Health check available at http://localhost:${PORT}/health`);
       console.log(`🗄️  Database health check available at http://localhost:${PORT}/health/db`);
       console.log(`🌍 Environment: ${process.env.NODE_ENV || 'development'}`);

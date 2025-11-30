@@ -421,4 +421,3 @@ router.post('/:id/payment', authenticateToken, [
 });
 
 export default router;
-//testing
