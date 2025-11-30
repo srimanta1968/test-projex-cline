@@ -56,7 +56,7 @@ const handleValidationErrors = (req: any, res: any, next: any) => {
 
 /**
  * POST /api/auth/register
- * Register a new user
+ * Register a new user and return auth tokens (auto-login)
  */
 router.post('/register', registerValidation, handleValidationErrors, async (req, res) => {
   try {
@@ -69,19 +69,23 @@ router.post('/register', registerValidation, handleValidationErrors, async (req,
       phone: req.body.phone
     };
 
-    const user = await AuthService.register(userData);
+    // Use registerWithAuth to get tokens immediately after registration
+    const authResult = await AuthService.registerWithAuth(userData);
 
     res.status(201).json({
       success: true,
       message: 'User registered successfully',
       data: {
-        id: user.id,
-        email: user.email,
-        username: user.username,
-        first_name: user.first_name,
-        last_name: user.last_name,
-        verified: user.verified,
-        created_at: user.created_at
+        user: {
+          id: authResult.user.id,
+          email: authResult.user.email,
+          username: authResult.user.username,
+          first_name: authResult.user.first_name,
+          last_name: authResult.user.last_name,
+          verified: authResult.user.verified,
+          created_at: authResult.user.created_at
+        },
+        tokens: authResult.tokens
       }
     });
   } catch (error) {
@@ -163,15 +167,33 @@ router.get('/me', authenticateToken, async (req, res) => {
 
 /**
  * POST /api/auth/refresh
- * Refresh access token (future implementation)
+ * Refresh access token
  */
 router.post('/refresh', async (req, res) => {
-  // For now, return not implemented
-  // In a full implementation, this would validate refresh tokens
-  res.status(501).json({
-    success: false,
-    error: 'Token refresh not implemented'
-  });
+  try {
+    const { userId } = req.body;
+
+    if (!userId) {
+      return res.status(400).json({
+        success: false,
+        error: 'User ID is required'
+      });
+    }
+
+    const tokens = await AuthService.refreshToken(userId);
+
+    res.status(200).json({
+      success: true,
+      message: 'Token refreshed successfully',
+      data: tokens
+    });
+  } catch (error) {
+    console.error('Token refresh error:', error);
+    res.status(500).json({
+      success: false,
+      error: 'Internal server error'
+    });
+  }
 });
 
 /**
@@ -188,4 +210,5 @@ router.post('/logout', (req, res) => {
 });
 
 export default router;
-//testing
+
+

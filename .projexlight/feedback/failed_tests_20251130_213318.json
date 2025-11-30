@@ -1,0 +1,64 @@
+{
+  "type": "failed_tests",
+  "timestamp": "2025-11-30T21:33:18.987714",
+  "totalFailures": 8,
+  "instructions": [
+    {
+      "endpoint": "POST /api/auth/register",
+      "issue": "Test failed with status 409",
+      "errorMessage": "Status 409 - Error: Email already registered",
+      "suggestedFix": "Review endpoint implementation and error handling",
+      "priority": "high"
+    },
+    {
+      "endpoint": "POST /api/auth/login",
+      "issue": "Test failed with status 401",
+      "errorMessage": "Status 401 - Error: Invalid email/username or password",
+      "suggestedFix": "Authentication required - add authentication token or check credentials",
+      "priority": "high"
+    },
+    {
+      "endpoint": "GET /api/auth/me",
+      "issue": "Test failed with status 403",
+      "errorMessage": "Status 403 - Error: Invalid token",
+      "suggestedFix": "Insufficient permissions - check authorization logic",
+      "priority": "high"
+    },
+    {
+      "endpoint": "POST /api/auth/refresh",
+      "issue": "Test failed with status 400",
+      "errorMessage": "Status 400 - Error: User ID is required",
+      "suggestedFix": "Check request validation - likely invalid input format or missing required fields",
+      "priority": "high"
+    },
+    {
+      "endpoint": "POST /api/rides/",
+      "issue": "Test failed with status 401",
+      "errorMessage": "Status 401 - Error: Access token required",
+      "suggestedFix": "Authentication required - add authentication token or check credentials",
+      "priority": "high"
+    },
+    {
+      "endpoint": "POST /api/rides/:id/join",
+      "issue": "Test failed with status 401",
+      "errorMessage": "Status 401 - Error: Access token required",
+      "suggestedFix": "Authentication required - add authentication token or check credentials",
+      "priority": "high"
+    },
+    {
+      "endpoint": "GET /api/rides/:id/calculate-cost",
+      "issue": "Test failed with status 400",
+      "errorMessage": "Status 400 - Error: Validation failed",
+      "suggestedFix": "Check request validation - likely invalid input format or missing required fields",
+      "priority": "high"
+    },
+    {
+      "endpoint": "POST /api/rides/:id/payment",
+      "issue": "Test failed with status 401",
+      "errorMessage": "Status 401 - Error: Access token required",
+      "suggestedFix": "Authentication required - add authentication token or check credentials",
+      "priority": "high"
+    }
+  ],
+  "llm_prompt": "# Failed API Tests - Fix Required\n\n8 API test(s) failed. Please review and fix the following issues:\n\n## Failed Tests:\n\n### Issue 1:\n- **endpoint**: POST /api/auth/register\n- **issue**: Test failed with status 409\n- **errorMessage**: Status 409 - Error: Email already registered\n- **suggestedFix**: Review endpoint implementation and error handling\n\n### Issue 2:\n- **endpoint**: POST /api/auth/login\n- **issue**: Test failed with status 401\n- **errorMessage**: Status 401 - Error: Invalid email/username or password\n- **suggestedFix**: Authentication required - add authentication token or check credentials\n\n### Issue 3:\n- **endpoint**: GET /api/auth/me\n- **issue**: Test failed with status 403\n- **errorMessage**: Status 403 - Error: Invalid token\n- **suggestedFix**: Insufficient permissions - check authorization logic\n\n### Issue 4:\n- **endpoint**: POST /api/auth/refresh\n- **issue**: Test failed with status 400\n- **errorMessage**: Status 400 - Error: User ID is required\n- **suggestedFix**: Check request validation - likely invalid input format or missing required fields\n\n### Issue 5:\n- **endpoint**: POST /api/rides/\n- **issue**: Test failed with status 401\n- **errorMessage**: Status 401 - Error: Access token required\n- **suggestedFix**: Authentication required - add authentication token or check credentials\n\n### Issue 6:\n- **endpoint**: POST /api/rides/:id/join\n- **issue**: Test failed with status 401\n- **errorMessage**: Status 401 - Error: Access token required\n- **suggestedFix**: Authentication required - add authentication token or check credentials\n\n### Issue 7:\n- **endpoint**: GET /api/rides/:id/calculate-cost\n- **issue**: Test failed with status 400\n- **errorMessage**: Status 400 - Error: Validation failed\n- **suggestedFix**: Check request validation - likely invalid input format or missing required fields\n\n### Issue 8:\n- **endpoint**: POST /api/rides/:id/payment\n- **issue**: Test failed with status 401\n- **errorMessage**: Status 401 - Error: Access token required\n- **suggestedFix**: Authentication required - add authentication token or check credentials\n\n## Instructions:\n1. Review each failed endpoint\n2. Check the error messages and status codes\n3. Implement the suggested fixes\n4. Re-run tests to verify fixes\n5. Ensure all tests pass before committing\n\n## Priority:\nHIGH - These failures may block deployment"
+}

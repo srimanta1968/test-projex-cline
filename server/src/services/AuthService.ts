@@ -82,6 +82,18 @@ export class AuthService {
   }
 
   /**
+   * Register a new user and return auth tokens (auto-login after registration)
+   */
+  static async registerWithAuth(userData: RegisterData): Promise<AuthResult> {
+    const user = await this.register(userData);
+    const tokens = this.generateTokens(user);
+    return {
+      user: this.sanitizeUser(user),
+      tokens
+    };
+  }
+
+  /**
    * Authenticate user login
    */
   static async login(credentials: LoginCredentials): Promise<AuthResult> {

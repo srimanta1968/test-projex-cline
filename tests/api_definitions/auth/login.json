@@ -8,7 +8,7 @@
     {
       "name": "Happy path - successful login with email",
       "payload": {
-        "identifier": "user@example.com",
+        "identifier": "testuser_12345@example.com",
         "password": "SecurePass123!"
       },
       "expectedStatus": 200,
@@ -18,8 +18,8 @@
         "data": {
           "user": {
             "id": "uuid-format-id",
-            "email": "user@example.com",
-            "username": "johndoe",
+            "email": "testuser_12345@example.com",
+            "username": "testuser_12345",
             "first_name": "John",
             "last_name": "Doe",
             "verified": false,
@@ -37,7 +37,7 @@
     {
       "name": "Login with username instead of email",
       "payload": {
-        "identifier": "johndoe",
+        "identifier": "testuser_12345",
         "password": "SecurePass123!"
       },
       "expectedStatus": 200,
