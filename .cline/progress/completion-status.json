@@ -1,101 +1,101 @@
 {
-  "sprint_id": "b18af032-9d2b-4fac-adda-296e0ffed93e",
+  "sprint_id": "a26ad173-2358-4fa6-94f5-09fc89d6cba7",
   "sprint_name": "Quick Prototype Sprint",
   "project_id": "c359a431-4f6a-48d5-866c-59b85ac18aca",
   "project_name": "Rider App",
   "overall_completion_percentage": 0,
   "tasks_by_status": {
-    "pending": 21,
+    "pending": 18,
     "in_progress": 0,
     "completed": 0
   },
   "epics_completion": [
     {
-      "epic_id": "6c20f3b7-2283-4538-aee4-310713597085",
-      "epic_title": "Mid-Journey Ride Sharing",
+      "epic_id": "d13f95eb-7b71-4fbc-90fc-afb8cb89a448",
+      "epic_title": "Real-Time Ride Matching",
       "completion_percentage": 0,
-      "tasks_total": 7,
+      "tasks_total": 6,
       "tasks_completed": 0
     },
     {
-      "epic_id": "43521b9f-734b-4c68-86b9-6b9dc1a82ecb",
-      "epic_title": "AI Route Optimization",
+      "epic_id": "8befdc5a-7c7c-4ee5-8919-ca7d6fa14f91",
+      "epic_title": "User and Driver Management",
       "completion_percentage": 0,
-      "tasks_total": 7,
+      "tasks_total": 6,
       "tasks_completed": 0
     },
     {
-      "epic_id": "4765668d-f9b6-490d-8f56-f2c8ea39ba79",
-      "epic_title": "Partnership and User Growth",
+      "epic_id": "2953049b-442f-4464-9bf7-4eab0a6f5d02",
+      "epic_title": "Ride Experience Enhancement",
       "completion_percentage": 0,
-      "tasks_total": 7,
+      "tasks_total": 6,
       "tasks_completed": 0
     }
   ],
   "features_completion": [
     {
-      "feature_id": "367c5596-b427-4676-9984-2127bbf9de17",
-      "feature_title": "User Verification & Onboarding",
+      "feature_id": "129452a6-f336-4237-ae7c-440dbe7362c5",
+      "feature_title": "User Ride Request",
       "completion_percentage": 0,
       "tasks_total": 2,
       "tasks_completed": 0
     },
     {
-      "feature_id": "6ee365ef-5e61-4c3e-8177-4deb0ed82a64",
-      "feature_title": "Automated Cost Splitting",
+      "feature_id": "ca60c366-4c3c-4c92-ba5f-33679a3e5240",
+      "feature_title": "Ride Matching Algorithm",
       "completion_percentage": 0,
       "tasks_total": 2,
       "tasks_completed": 0
     },
     {
-      "feature_id": "86afad61-1351-49c2-976b-eebd27efb491",
-      "feature_title": "Real-Time Ride Matching",
-      "completion_percentage": 0,
-      "tasks_total": 3,
-      "tasks_completed": 0
-    },
-    {
-      "feature_id": "2541ad29-6b73-4c18-895a-8940261d7926",
-      "feature_title": "Route Planning Engine",
+      "feature_id": "0969aa13-e03d-4273-9ad4-fc17866c43f1",
+      "feature_title": "Cost Splitting Feature",
       "completion_percentage": 0,
       "tasks_total": 2,
       "tasks_completed": 0
     },
     {
-      "feature_id": "0e7449cc-a206-48d9-8d14-e2e87986aff0",
-      "feature_title": "Dynamic Fare Adjustments",
-      "completion_percentage": 0,
-      "tasks_total": 3,
-      "tasks_completed": 0
-    },
-    {
-      "feature_id": "58424cdd-d0f7-47a0-bcee-1d34f65ef8be",
-      "feature_title": "Safety and Compliance Features",
+      "feature_id": "27f897bc-b4b6-4dd1-9817-c32af29fcf3c",
+      "feature_title": "User Registration",
       "completion_percentage": 0,
       "tasks_total": 2,
       "tasks_completed": 0
     },
     {
-      "feature_id": "0b10d679-c1c4-4e3b-ab5a-845e1ab9ed00",
-      "feature_title": "Municipal Partnerships",
+      "feature_id": "63f8e9d4-76e6-4e41-8b9d-e1acb66108e0",
+      "feature_title": "Driver Verification",
       "completion_percentage": 0,
       "tasks_total": 2,
       "tasks_completed": 0
     },
     {
-      "feature_id": "7ecf8d01-121b-4e7f-abbf-fa51f589a316",
-      "feature_title": "User Acquisition Campaigns",
+      "feature_id": "e7adce4a-7afa-42cd-b32a-f2024d0fd2e8",
+      "feature_title": "User Profile Management",
       "completion_percentage": 0,
-      "tasks_total": 3,
+      "tasks_total": 2,
       "tasks_completed": 0
     },
     {
-      "feature_id": "fa82f7a4-efa5-4050-8de3-8761433f5001",
-      "feature_title": "User Retention Strategies",
+      "feature_id": "35e4f2e9-5988-4198-851b-3102b4ab8dd8",
+      "feature_title": "Real-Time Ride Tracking",
+      "completion_percentage": 0,
+      "tasks_total": 2,
+      "tasks_completed": 0
+    },
+    {
+      "feature_id": "64c4e1ed-9ee9-4465-aec1-1d5b8649e625",
+      "feature_title": "Ride Feedback System",
+      "completion_percentage": 0,
+      "tasks_total": 2,
+      "tasks_completed": 0
+    },
+    {
+      "feature_id": "41a8eee6-e0af-4e0d-b55a-83f9fbe2b2e5",
+      "feature_title": "In-App Communication",
       "completion_percentage": 0,
       "tasks_total": 2,
       "tasks_completed": 0
     }
   ],
-  "last_updated": "2025-11-29T01:29:43.983Z"
+  "last_updated": "2025-11-29T05:04:27.710Z"
 }

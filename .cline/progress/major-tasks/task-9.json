@@ -1,8 +1,8 @@
 {
   "sequence_number": 9,
-  "task_id": "412b6d2b-f4ab-437c-bf05-d7a63954cfe7",
-  "title": "User Feedback Mechanism",
-  "description": "Develop a feedback system for users to rate their ride experience.",
+  "task_id": "4b34ff51-e70f-4a99-bb0c-f110fce5d6f2",
+  "title": "Implement Cost Splitting API",
+  "description": "Develop an API endpoint for handling cost splitting.",
   "task_type": "development",
   "task_role": "developer",
   "status": "pending",
@@ -19,7 +19,7 @@
     {
       "sequence_number": 1,
       "title": "Analyze requirements and plan implementation",
-      "description": "Develop a feedback system for users to rate their ride experience.",
+      "description": "Develop an API endpoint for handling cost splitting.",
       "status": "pending",
       "files_to_generate": [],
       "estimated_tokens": 1000,
@@ -31,7 +31,7 @@
     {
       "sequence_number": 2,
       "title": "Implement core functionality",
-      "description": "Implement User Feedback Mechanism",
+      "description": "Implement Implement Cost Splitting API",
       "status": "pending",
       "files_to_generate": [
         "server/src/**/*",

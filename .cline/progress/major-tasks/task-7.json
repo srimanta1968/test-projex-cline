@@ -1,8 +1,8 @@
 {
   "sequence_number": 7,
-  "task_id": "5b8fda08-0469-4f54-b4cd-1941834fab28",
-  "title": "Develop Matching Algorithm",
-  "description": "Create an algorithm to match users based on proximity and ride preferences.",
+  "task_id": "240793b0-8819-408b-bf17-9efef87cd07a",
+  "title": "Integrate GPS Location Services",
+  "description": "Implement GPS functionality to fetch user's current location.",
   "task_type": "development",
   "task_role": "developer",
   "status": "pending",
@@ -19,7 +19,7 @@
     {
       "sequence_number": 1,
       "title": "Analyze requirements and plan implementation",
-      "description": "Create an algorithm to match users based on proximity and ride preferences.",
+      "description": "Implement GPS functionality to fetch user's current location.",
       "status": "pending",
       "files_to_generate": [],
       "estimated_tokens": 1000,
@@ -31,7 +31,7 @@
     {
       "sequence_number": 2,
       "title": "Implement core functionality",
-      "description": "Implement Develop Matching Algorithm",
+      "description": "Implement Integrate GPS Location Services",
       "status": "pending",
       "files_to_generate": [
         "server/src/**/*",

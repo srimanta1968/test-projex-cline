@@ -1,8 +1,8 @@
 {
   "sequence_number": 13,
-  "task_id": "539f0912-7d51-4ff4-a51a-5874d305afc6",
-  "title": "User Notification System for Fare Changes",
-  "description": "Develop a system to notify users of fare changes.",
+  "task_id": "67d1b497-ee71-4b46-bed9-92e9c760aba4",
+  "title": "Implement Profile Update API",
+  "description": "Develop API for updating user profiles.",
   "task_type": "development",
   "task_role": "developer",
   "status": "pending",
@@ -19,7 +19,7 @@
     {
       "sequence_number": 1,
       "title": "Analyze requirements and plan implementation",
-      "description": "Develop a system to notify users of fare changes.",
+      "description": "Develop API for updating user profiles.",
       "status": "pending",
       "files_to_generate": [],
       "estimated_tokens": 1000,
@@ -31,7 +31,7 @@
     {
       "sequence_number": 2,
       "title": "Implement core functionality",
-      "description": "Implement User Notification System for Fare Changes",
+      "description": "Implement Implement Profile Update API",
       "status": "pending",
       "files_to_generate": [
         "server/src/**/*",

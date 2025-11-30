@@ -1,8 +1,11 @@
-import express, { Request, Response, NextFunction } from 'express';
+import express from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
 import rateLimit from 'express-rate-limit';
 import dotenv from 'dotenv';
+import { testConnection } from './config/database';
+import authRoutes from './routes/authRoutes';
+import rideRoutes from './routes/rideRoutes';
 
 // Load environment variables
 dotenv.config();
@@ -11,48 +14,84 @@ const app = express();
 
 // Security middleware
 app.use(helmet());
-app.use(cors({
-  origin: process.env.FRONTEND_URL || 'http://localhost:3000',
-  credentials: true
-}));
+
+// CORS configuration
+const corsOptions = {
+  origin: process.env.CORS_ORIGIN || 'http://localhost:3000',
+  credentials: true,
+  optionsSuccessStatus: 200
+};
+app.use(cors(corsOptions));
 
 // Rate limiting
 const limiter = rateLimit({
-  windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 100, // limit each IP to 100 requests per windowMs
-  message: 'Too many requests from this IP, please try again later.'
+  windowMs: parseInt(process.env.RATE_LIMIT_WINDOW_MS || '900000'), // 15 minutes
+  max: parseInt(process.env.RATE_LIMIT_MAX_REQUESTS || '100'), // limit each IP to 100 requests per windowMs
+  message: {
+    error: 'Too many requests from this IP, please try again later.'
+  },
+  standardHeaders: true,
+  legacyHeaders: false,
 });
 app.use(limiter);
 
 // Body parsing middleware
 app.use(express.json({ limit: '10mb' }));
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 
 // Health check endpoint
-app.get('/health', (_req: Request, res: Response) => {
-  res.json({ status: 'OK', timestamp: new Date().toISOString() });
-});
-
-import authRoutes from './routes/authRoutes';
-
-// API routes
-app.use('/api/auth', authRoutes);
-
-// 404 handler
-app.use('*', (_req: Request, res: Response): void => {
-  res.status(404).json({
-    success: false,
-    message: 'Route not found'
+app.get('/health', (req, res) => {
+  res.status(200).json({
+    status: 'OK',
+    timestamp: new Date().toISOString(),
+    uptime: process.uptime(),
+    environment: process.env.NODE_ENV || 'development'
   });
 });
 
-// Global error handler
-app.use((err: any, _req: Request, res: Response, _next: NextFunction): void => {
-  console.error('Error:', err);
+// Database health check endpoint
+app.get('/health/db', async (req, res) => {
+  try {
+    const dbConnected = await testConnection();
+    if (dbConnected) {
+      res.status(200).json({
+        status: 'OK',
+        database: 'connected',
+        timestamp: new Date().toISOString()
+      });
+    } else {
+      res.status(503).json({
+        status: 'ERROR',
+        database: 'disconnected',
+        timestamp: new Date().toISOString()
+      });
+    }
+  } catch (error) {
+    res.status(503).json({
+      status: 'ERROR',
+      database: 'error',
+      error: error instanceof Error ? error.message : 'Unknown error',
+      timestamp: new Date().toISOString()
+    });
+  }
+});
 
-  res.status(err.status || 500).json({
-    success: false,
-    message: err.message || 'Internal server error'
+// API routes
+app.use('/api/auth', authRoutes);
+app.use('/api/rides', rideRoutes);
+
+// Root endpoint
+app.get('/', (req, res) => {
+  res.json({
+    message: 'Rider App API',
+    version: '1.0.0',
+    status: 'Running',
+    endpoints: {
+      auth: '/api/auth',
+      rides: '/api/rides',
+      health: '/health',
+      dbHealth: '/health/db'
+    }
   });
 });
 

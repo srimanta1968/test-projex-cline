@@ -1,8 +1,8 @@
 {
   "sequence_number": 12,
-  "task_id": "e4ec4356-7aee-4ed2-907b-b1c538949d9c",
-  "title": "Develop Fare Adjustment Logic",
-  "description": "Implement logic to adjust fares based on real-time data.",
+  "task_id": "7b7afca9-de0f-4094-a4ce-e8f213db3e4b",
+  "title": "Implement Verification API",
+  "description": "Create an API for submitting and checking driver information.",
   "task_type": "development",
   "task_role": "developer",
   "status": "pending",
@@ -19,7 +19,7 @@
     {
       "sequence_number": 1,
       "title": "Analyze requirements and plan implementation",
-      "description": "Implement logic to adjust fares based on real-time data.",
+      "description": "Create an API for submitting and checking driver information.",
       "status": "pending",
       "files_to_generate": [],
       "estimated_tokens": 1000,
@@ -31,7 +31,7 @@
     {
       "sequence_number": 2,
       "title": "Implement core functionality",
-      "description": "Implement Develop Fare Adjustment Logic",
+      "description": "Implement Implement Verification API",
       "status": "pending",
       "files_to_generate": [
         "server/src/**/*",

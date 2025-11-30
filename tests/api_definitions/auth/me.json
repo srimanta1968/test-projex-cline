@@ -1,23 +1,47 @@
 {
   "endpoint": "/api/auth/me",
   "method": "GET",
-  "description": "Get current user profile information",
+  "description": "Get current authenticated user's profile information",
   "requiresAuth": true,
-  "tags": ["auth", "profile"],
+  "tags": ["auth", "profile", "user"],
   "testCases": [
     {
-      "name": "Happy path - get profile with valid token",
+      "name": "Happy path - get user profile",
+      "headers": {
+        "Authorization": "Bearer valid-jwt-token"
+      },
       "expectedStatus": 200,
       "expectedResponse": {
         "success": true,
         "data": {
-          "id": "123e4567-e89b-12d3-a456-426614174000",
+          "id": "uuid-format-id",
           "email": "user@example.com",
           "username": "johndoe",
           "first_name": "John",
           "last_name": "Doe",
-          "created_at": "2024-01-15T10:30:00Z"
+          "verified": false,
+          "created_at": "timestamp-format",
+          "updated_at": "timestamp-format"
         }
+      }
+    },
+    {
+      "name": "Unauthorized - missing token",
+      "expectedStatus": 401,
+      "expectedResponse": {
+        "success": false,
+        "error": "Access token is required"
+      }
+    },
+    {
+      "name": "Unauthorized - invalid token",
+      "headers": {
+        "Authorization": "Bearer invalid-jwt-token"
+      },
+      "expectedStatus": 401,
+      "expectedResponse": {
+        "success": false,
+        "error": "Invalid token"
       }
     }
   ]

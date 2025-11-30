@@ -1,0 +1,42 @@
+{
+  "endpoint": "/api/rides/:id/join",
+  "method": "POST",
+  "description": "Join an existing ride as a passenger",
+  "requiresAuth": true,
+  "tags": ["rides", "joining"],
+  "testCases": [
+    {
+      "name": "Happy path - join ride successfully",
+      "pathParams": {
+        "id": "ride-uuid-format"
+      },
+      "expectedStatus": 200,
+      "expectedResponse": {
+        "success": true,
+        "message": "Successfully joined the ride",
+        "data": {
+          "ride_id": "ride-uuid-format",
+          "user_id": "current-user-uuid",
+          "status": "joined",
+          "joined_at": "timestamp-format",
+          "ride": {
+            "id": "ride-uuid-format",
+            "origin": {
+              "latitude": 37.7749,
+              "longitude": -122.4194,
+              "address": "123 Main St, San Francisco, CA"
+            },
+            "destination": {
+              "latitude": 37.7849,
+              "longitude": -122.4094,
+              "address": "456 Market St, San Francisco, CA"
+            },
+            "seats_available": 2,
+            "price_per_seat": 15.50,
+            "status": "active"
+          }
+        }
+      }
+    }
+  ]
+}

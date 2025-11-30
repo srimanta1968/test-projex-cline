@@ -1,14 +1,14 @@
 {
   "endpoint": "/api/auth/login",
   "method": "POST",
-  "description": "Authenticate user and return JWT token",
+  "description": "Authenticate user with email/username and password, return JWT tokens",
   "requiresAuth": false,
-  "tags": ["auth", "login"],
+  "tags": ["auth", "login", "tokens"],
   "testCases": [
     {
-      "name": "Happy path - successful login",
+      "name": "Happy path - successful login with email",
       "payload": {
-        "email": "user@example.com",
+        "identifier": "user@example.com",
         "password": "SecurePass123!"
       },
       "expectedStatus": 200,
@@ -17,14 +17,45 @@
         "message": "Login successful",
         "data": {
           "user": {
-            "id": "123e4567-e89b-12d3-a456-426614174000",
+            "id": "uuid-format-id",
             "email": "user@example.com",
             "username": "johndoe",
             "first_name": "John",
-            "last_name": "Doe"
+            "last_name": "Doe",
+            "verified": false,
+            "created_at": "timestamp-format",
+            "updated_at": "timestamp-format"
           },
-          "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+          "tokens": {
+            "accessToken": "jwt-token-format",
+            "tokenType": "Bearer",
+            "expiresIn": 3600
+          }
         }
+      }
+    },
+    {
+      "name": "Login with username instead of email",
+      "payload": {
+        "identifier": "johndoe",
+        "password": "SecurePass123!"
+      },
+      "expectedStatus": 200,
+      "expectedResponse": {
+        "success": true,
+        "message": "Login successful"
+      }
+    },
+    {
+      "name": "Invalid credentials",
+      "payload": {
+        "identifier": "nonexistent@example.com",
+        "password": "wrongpassword"
+      },
+      "expectedStatus": 401,
+      "expectedResponse": {
+        "success": false,
+        "error": "Invalid email/username or password"
       }
     }
   ]

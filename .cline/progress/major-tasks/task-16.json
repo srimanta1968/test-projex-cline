@@ -1,8 +1,8 @@
 {
   "sequence_number": 16,
-  "task_id": "b9f2f405-09dd-44eb-8896-d56f8c2de370",
-  "title": "Create Partnership Proposals",
-  "description": "Draft proposals for potential partnerships.",
+  "task_id": "fc9baf87-989a-4a0b-a239-7f6c8d349af7",
+  "title": "Implement Feedback Submission API",
+  "description": "Develop API for submitting ride feedback.",
   "task_type": "development",
   "task_role": "developer",
   "status": "pending",
@@ -19,7 +19,7 @@
     {
       "sequence_number": 1,
       "title": "Analyze requirements and plan implementation",
-      "description": "Draft proposals for potential partnerships.",
+      "description": "Develop API for submitting ride feedback.",
       "status": "pending",
       "files_to_generate": [],
       "estimated_tokens": 1000,
@@ -31,7 +31,7 @@
     {
       "sequence_number": 2,
       "title": "Implement core functionality",
-      "description": "Implement Create Partnership Proposals",
+      "description": "Implement Implement Feedback Submission API",
       "status": "pending",
       "files_to_generate": [
         "server/src/**/*",

@@ -1,0 +1,54 @@
+{
+  "endpoint": "/api/rides",
+  "method": "GET",
+  "description": "Get list of available rides with optional filtering",
+  "requiresAuth": false,
+  "tags": ["rides", "listing"],
+  "testCases": [
+    {
+      "name": "Happy path - get available rides",
+      "queryParams": {
+        "status": "active",
+        "limit": 10,
+        "offset": 0
+      },
+      "expectedStatus": 200,
+      "expectedResponse": {
+        "success": true,
+        "data": [
+          {
+            "id": "ride-uuid-1",
+            "creator_id": "user-uuid-1",
+            "origin": {
+              "latitude": 37.7749,
+              "longitude": -122.4194,
+              "address": "123 Main St, San Francisco, CA"
+            },
+            "destination": {
+              "latitude": 37.7849,
+              "longitude": -122.4094,
+              "address": "456 Market St, San Francisco, CA"
+            },
+            "seats_available": 3,
+            "price_per_seat": 15.50,
+            "status": "active",
+            "created_at": "timestamp-format",
+            "updated_at": "timestamp-format",
+            "creator": {
+              "id": "user-uuid-1",
+              "first_name": "John",
+              "last_name": "Doe",
+              "verified": true
+            }
+          }
+        ],
+        "pagination": {
+          "total": 1,
+          "limit": 10,
+          "offset": 0,
+          "has_more": false
+        }
+      }
+    }
+  ]
+}

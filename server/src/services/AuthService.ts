@@ -1,6 +1,26 @@
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
-import { UserModel, CreateUserData } from '../models/User';
+import UserModel, { User, CreateUserData } from '../models/User';
+import dotenv from 'dotenv';
+
+// Load environment variables
+dotenv.config();
+
+export interface LoginCredentials {
+  identifier: string; // email or username
+  password: string;
+}
+
+export interface AuthTokens {
+  accessToken: string;
+  tokenType: string;
+  expiresIn: number;
+}
+
+export interface AuthResult {
+  user: User;
+  tokens: AuthTokens;
+}
 
 export interface RegisterData {
   email: string;
@@ -8,184 +28,243 @@ export interface RegisterData {
   password: string;
   first_name: string;
   last_name: string;
-}
-
-export interface LoginData {
-  email: string;
-  password: string;
-}
-
-export interface AuthResponse {
-  user: {
-    id: string;
-    email: string;
-    username: string;
-    first_name: string;
-    last_name: string;
-  };
-  token: string;
+  phone?: string;
 }
 
 export class AuthService {
-  private static readonly JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key';
-  private static readonly SALT_ROUNDS = 12;
+  private static readonly JWT_SECRET: string = process.env.JWT_SECRET || 'fallback-secret-change-in-production';
+  private static readonly JWT_EXPIRES_IN: string = process.env.JWT_EXPIRES_IN || '7d';
+  private static readonly BCRYPT_ROUNDS = parseInt(process.env.BCRYPT_ROUNDS || '12');
 
   /**
    * Register a new user
    */
-  static async register(userData: RegisterData): Promise<AuthResponse> {
+  static async register(userData: RegisterData): Promise<User> {
+    const { email, username, password, first_name, last_name, phone } = userData;
+
+    // Validate input
+    await this.validateRegistrationData(userData);
+
+    // Check if email or username already exists
+    const emailExists = await UserModel.emailExists(email);
+    if (emailExists) {
+      throw new Error('Email already registered');
+    }
+
+    const usernameExists = await UserModel.usernameExists(username);
+    if (usernameExists) {
+      throw new Error('Username already taken');
+    }
+
+    // Hash password
+    const passwordHash = await this.hashPassword(password);
+
+    // Create user
+    const createData: CreateUserData = {
+      email,
+      username,
+      password_hash: passwordHash,
+      first_name,
+      last_name
+    };
+
+    if (phone) {
+      createData.phone = phone;
+    }
+
     try {
-      // Check if user already exists
-      const existingUser = await UserModel.findByEmail(userData.email);
-      if (existingUser) {
-        throw new Error('User with this email already exists');
-      }
-
-      const existingUsername = await UserModel.findByUsername(userData.username);
-      if (existingUsername) {
-        throw new Error('Username already taken');
-      }
-
-      // Hash password
-      const password_hash = await bcrypt.hash(userData.password, this.SALT_ROUNDS);
-
-      // Create user
-      const createData: CreateUserData = {
-        email: userData.email,
-        username: userData.username,
-        password_hash,
-        first_name: userData.first_name,
-        last_name: userData.last_name
-      };
-
       const user = await UserModel.create(createData);
-
-      // Generate JWT token
-      const token = this.generateToken(user.id);
-
-      return {
-        user: {
-          id: user.id,
-          email: user.email,
-          username: user.username,
-          first_name: user.first_name,
-          last_name: user.last_name
-        },
-        token
-      };
+      return user;
     } catch (error) {
-      console.error('Error registering user:', error);
-      throw error;
+      console.error('Error creating user during registration:', error);
+      throw new Error('Failed to create user account');
     }
   }
 
   /**
-   * Login user
+   * Authenticate user login
    */
-  static async login(loginData: LoginData): Promise<AuthResponse> {
-    try {
-      // Find user by email
-      const user = await UserModel.findByEmail(loginData.email);
-      if (!user) {
-        throw new Error('Invalid email or password');
-      }
+  static async login(credentials: LoginCredentials): Promise<AuthResult> {
+    const { identifier, password } = credentials;
 
-      // Verify password
-      const isPasswordValid = await bcrypt.compare(loginData.password, user.password_hash);
-      if (!isPasswordValid) {
-        throw new Error('Invalid email or password');
-      }
-
-      // Generate JWT token
-      const token = this.generateToken(user.id);
-
-      return {
-        user: {
-          id: user.id,
-          email: user.email,
-          username: user.username,
-          first_name: user.first_name,
-          last_name: user.last_name
-        },
-        token
-      };
-    } catch (error) {
-      console.error('Error logging in user:', error);
-      throw error;
+    // Find user by email or username
+    const user = await UserModel.findByEmailOrUsername(identifier);
+    if (!user) {
+      throw new Error('Invalid credentials');
     }
+
+    // Verify password
+    if (!user.password_hash) {
+      throw new Error('Invalid credentials');
+    }
+    const isValidPassword = await this.verifyPassword(password, user.password_hash);
+    if (!isValidPassword) {
+      throw new Error('Invalid credentials');
+    }
+
+    // Generate tokens
+    const tokens = this.generateTokens(user);
+
+    return {
+      user: this.sanitizeUser(user),
+      tokens
+    };
   }
 
   /**
-   * Get user profile by ID
+   * Verify JWT token and return user
    */
-  static async getProfile(userId: string) {
+  static async verifyToken(token: string): Promise<User> {
     try {
-      const user = await UserModel.findById(userId);
+      const decoded = jwt.verify(token, this.JWT_SECRET) as jwt.JwtPayload;
+
+      if (!decoded.sub) {
+        throw new Error('Invalid token: missing subject');
+      }
+
+      const user = await UserModel.findById(decoded.sub);
       if (!user) {
         throw new Error('User not found');
       }
 
-      return {
-        id: user.id,
-        email: user.email,
-        username: user.username,
-        first_name: user.first_name,
-        last_name: user.last_name,
-        created_at: user.created_at
-      };
+      return this.sanitizeUser(user);
     } catch (error) {
-      console.error('Error getting user profile:', error);
+      if (error instanceof jwt.TokenExpiredError) {
+        throw new Error('Token expired');
+      } else if (error instanceof jwt.JsonWebTokenError) {
+        throw new Error('Invalid token');
+      }
       throw error;
     }
   }
 
   /**
-   * Verify JWT token and return user ID
+   * Refresh access token (if needed in future)
    */
-  static verifyToken(token: string): string {
+  static async refreshToken(userId: string): Promise<AuthTokens> {
+    const user = await UserModel.findById(userId);
+    if (!user) {
+      throw new Error('User not found');
+    }
+
+    return this.generateTokens(user);
+  }
+
+  /**
+   * Hash password using bcrypt
+   */
+  private static async hashPassword(password: string): Promise<string> {
     try {
-      const decoded = jwt.verify(token, this.JWT_SECRET) as { userId: string };
-      return decoded.userId;
+      return await bcrypt.hash(password, this.BCRYPT_ROUNDS);
     } catch (error) {
-      throw new Error('Invalid or expired token');
+      console.error('Error hashing password:', error);
+      throw new Error('Failed to process password');
     }
   }
 
   /**
-   * Generate JWT token
+   * Verify password against hash
    */
-  private static generateToken(userId: string): string {
-    return jwt.sign({ userId }, this.JWT_SECRET, { expiresIn: '7d' });
+  private static async verifyPassword(password: string, hash: string): Promise<boolean> {
+    try {
+      return await bcrypt.compare(password, hash);
+    } catch (error) {
+      console.error('Error verifying password:', error);
+      return false;
+    }
   }
 
   /**
-   * Validate email format
+   * Generate JWT tokens
    */
-  static validateEmail(email: string): boolean {
+  private static generateTokens(user: User): AuthTokens {
+    const payload = {
+      sub: user.id,
+      email: user.email,
+      username: user.username,
+      iat: Math.floor(Date.now() / 1000)
+    };
+
+    const accessToken = jwt.sign(payload, this.JWT_SECRET, {
+      expiresIn: this.JWT_EXPIRES_IN
+    } as jwt.SignOptions);
+
+    return {
+      accessToken,
+      tokenType: 'Bearer',
+      expiresIn: this.getExpiresInSeconds()
+    };
+  }
+
+  /**
+   * Get expiration time in seconds
+   */
+  private static getExpiresInSeconds(): number {
+    const expiresIn = this.JWT_EXPIRES_IN;
+
+    if (typeof expiresIn === 'string') {
+      const match = expiresIn.match(/^(\d+)([smhd])$/);
+      if (match) {
+        const value = parseInt(match[1]);
+        const unit = match[2];
+
+        switch (unit) {
+          case 's': return value;
+          case 'm': return value * 60;
+          case 'h': return value * 60 * 60;
+          case 'd': return value * 60 * 60 * 24;
+          default: return 7 * 24 * 60 * 60; // 7 days default
+        }
+      }
+    }
+
+    return 7 * 24 * 60 * 60; // 7 days default
+  }
+
+  /**
+   * Validate registration data
+   */
+  private static async validateRegistrationData(data: RegisterData): Promise<void> {
+    const { email, username, password, first_name, last_name } = data;
+
+    // Email validation
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
+    if (!emailRegex.test(email)) {
+      throw new Error('Invalid email format');
+    }
+
+    // Username validation
+    if (username.length < 3 || username.length > 50) {
+      throw new Error('Username must be between 3 and 50 characters');
+    }
+
+    const usernameRegex = /^[a-zA-Z0-9_]+$/;
+    if (!usernameRegex.test(username)) {
+      throw new Error('Username can only contain letters, numbers, and underscores');
+    }
+
+    // Password validation
+    if (password.length < 8) {
+      throw new Error('Password must be at least 8 characters long');
+    }
+
+    // Name validation
+    if (!first_name.trim() || !last_name.trim()) {
+      throw new Error('First name and last name are required');
+    }
+
+    if (first_name.length > 100 || last_name.length > 100) {
+      throw new Error('Names cannot exceed 100 characters');
+    }
   }
 
   /**
-   * Validate password strength
+   * Remove sensitive data from user object
    */
-  static validatePassword(password: string): { isValid: boolean; message?: string } {
-    if (password.length < 8) {
-      return { isValid: false, message: 'Password must be at least 8 characters long' };
-    }
-
-    if (!/(?=.*[a-z])/.test(password)) {
-      return { isValid: false, message: 'Password must contain at least one lowercase letter' };
-    }
-
-    if (!/(?=.*[A-Z])/.test(password)) {
-      return { isValid: false, message: 'Password must contain at least one uppercase letter' };
-    }
-
-    if (!/(?=.*\d)/.test(password)) {
-      return { isValid: false, message: 'Password must contain at least one number' };
-    }
-
-    return { isValid: true };
+  private static sanitizeUser(user: User): User {
+    const { password_hash, ...sanitizedUser } = user;
+    return sanitizedUser;
   }
 }
+
+export default AuthService;

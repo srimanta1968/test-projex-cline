@@ -1,8 +1,8 @@
 {
   "sequence_number": 17,
-  "task_id": "5eb5c36f-8fb3-47bd-bf76-9e94372df322",
-  "title": "Develop Partnership Agreements",
-  "description": "Work on legal agreements for partnerships.",
+  "task_id": "f6d3119f-fafd-476b-9b87-81738a1092f3",
+  "title": "Analyze Feedback Data",
+  "description": "Implement analysis tools to review feedback for improvements.",
   "task_type": "development",
   "task_role": "developer",
   "status": "pending",
@@ -19,7 +19,7 @@
     {
       "sequence_number": 1,
       "title": "Analyze requirements and plan implementation",
-      "description": "Work on legal agreements for partnerships.",
+      "description": "Implement analysis tools to review feedback for improvements.",
       "status": "pending",
       "files_to_generate": [],
       "estimated_tokens": 1000,
@@ -31,7 +31,7 @@
     {
       "sequence_number": 2,
       "title": "Implement core functionality",
-      "description": "Implement Develop Partnership Agreements",
+      "description": "Implement Analyze Feedback Data",
       "status": "pending",
       "files_to_generate": [
         "server/src/**/*",

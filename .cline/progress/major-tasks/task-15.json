@@ -1,8 +1,8 @@
 {
   "sequence_number": 15,
-  "task_id": "0c38b850-f0da-437a-bca5-c6eb1ca782a1",
-  "title": "Implement User Reporting System",
-  "description": "Build a system for users to report issues or concerns.",
+  "task_id": "80f071bf-e370-4d00-ac08-2a5b78e770d1",
+  "title": "Implement GPS Tracking Feature",
+  "description": "Develop a feature for real-time GPS tracking of rides.",
   "task_type": "development",
   "task_role": "developer",
   "status": "pending",
@@ -19,7 +19,7 @@
     {
       "sequence_number": 1,
       "title": "Analyze requirements and plan implementation",
-      "description": "Build a system for users to report issues or concerns.",
+      "description": "Develop a feature for real-time GPS tracking of rides.",
       "status": "pending",
       "files_to_generate": [],
       "estimated_tokens": 1000,
@@ -31,7 +31,7 @@
     {
       "sequence_number": 2,
       "title": "Implement core functionality",
-      "description": "Implement Implement User Reporting System",
+      "description": "Implement Implement GPS Tracking Feature",
       "status": "pending",
       "files_to_generate": [
         "server/src/**/*",

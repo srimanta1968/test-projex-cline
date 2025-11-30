@@ -1,0 +1,32 @@
+{
+  "endpoint": "/api/rides/:id/calculate-cost",
+  "method": "GET",
+  "description": "Calculate the cost breakdown for a ride based on distance and passengers",
+  "requiresAuth": false,
+  "tags": ["rides", "cost", "calculation"],
+  "testCases": [
+    {
+      "name": "Happy path - calculate cost for ride with 2 passengers",
+      "pathParams": {
+        "id": "ride-uuid-format"
+      },
+      "expectedStatus": 200,
+      "expectedResponse": {
+        "success": true,
+        "data": {
+          "ride_id": "ride-uuid-format",
+          "base_fare": 10.00,
+          "distance_fare": 5.50,
+          "passenger_count": 2,
+          "total_cost": 15.50,
+          "cost_per_passenger": 7.75,
+          "breakdown": {
+            "distance_km": 2.5,
+            "rate_per_km": 2.20,
+            "passenger_split": "equal"
+          }
+        }
+      }
+    }
+  ]
+}

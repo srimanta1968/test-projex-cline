@@ -1,8 +1,8 @@
 {
   "sequence_number": 10,
-  "task_id": "fb47d25c-c436-48a7-a09a-95da32f3d128",
-  "title": "Build Route Optimization Module",
-  "description": "Develop the core module for route optimization.",
+  "task_id": "ff0880dc-cf93-4e4f-be18-c2a7c56d581f",
+  "title": "Implement User Registration API",
+  "description": "Develop API for user registration and validation.",
   "task_type": "development",
   "task_role": "developer",
   "status": "pending",
@@ -19,7 +19,7 @@
     {
       "sequence_number": 1,
       "title": "Analyze requirements and plan implementation",
-      "description": "Develop the core module for route optimization.",
+      "description": "Develop API for user registration and validation.",
       "status": "pending",
       "files_to_generate": [],
       "estimated_tokens": 1000,
@@ -31,7 +31,7 @@
     {
       "sequence_number": 2,
       "title": "Implement core functionality",
-      "description": "Implement Build Route Optimization Module",
+      "description": "Implement Implement User Registration API",
       "status": "pending",
       "files_to_generate": [
         "server/src/**/*",

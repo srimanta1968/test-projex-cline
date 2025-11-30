@@ -1,8 +1,8 @@
 {
   "sequence_number": 2,
-  "task_id": "3699f045-0c9e-48ec-8f66-d8b7445b3f6c",
-  "title": "Analyze Campaign Performance",
-  "description": "Monitor and analyze the performance of marketing campaigns.",
+  "task_id": "db94492f-77e6-4f7b-b33d-2b69a61235f1",
+  "title": "Test Cost Splitting Accuracy",
+  "description": "Conduct tests to ensure accurate cost splitting among passengers.",
   "task_type": "testing",
   "task_role": "developer",
   "status": "pending",

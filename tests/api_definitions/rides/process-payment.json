@@ -1,0 +1,42 @@
+{
+  "endpoint": "/api/rides/:id/payment",
+  "method": "POST",
+  "description": "Process payment for ride completion and split costs among passengers",
+  "requiresAuth": true,
+  "tags": ["rides", "payment", "cost-splitting"],
+  "testCases": [
+    {
+      "name": "Happy path - process payment for completed ride",
+      "pathParams": {
+        "id": "ride-uuid-format"
+      },
+      "payload": {
+        "payment_method": "card",
+        "card_token": "tok_visa_test"
+      },
+      "expectedStatus": 200,
+      "expectedResponse": {
+        "success": true,
+        "message": "Payment processed successfully",
+        "data": {
+          "ride_id": "ride-uuid-format",
+          "total_amount": 15.50,
+          "passenger_payments": [
+            {
+              "user_id": "passenger-uuid-1",
+              "amount": 7.75,
+              "status": "completed"
+            },
+            {
+              "user_id": "passenger-uuid-2",
+              "amount": 7.75,
+              "status": "completed"
+            }
+          ],
+          "transaction_id": "txn-uuid-format",
+          "payment_status": "completed"
+        }
+      }
+    }
+  ]
+}

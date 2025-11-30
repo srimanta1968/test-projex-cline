@@ -1,0 +1,50 @@
+{
+  "endpoint": "/api/rides",
+  "method": "POST",
+  "description": "Create a new ride with pickup and dropoff locations",
+  "requiresAuth": true,
+  "tags": ["rides", "creation"],
+  "testCases": [
+    {
+      "name": "Happy path - create ride successfully",
+      "payload": {
+        "origin": {
+          "latitude": 37.7749,
+          "longitude": -122.4194,
+          "address": "123 Main St, San Francisco, CA"
+        },
+        "destination": {
+          "latitude": 37.7849,
+          "longitude": -122.4094,
+          "address": "456 Market St, San Francisco, CA"
+        },
+        "seats_available": 3,
+        "price_per_seat": 15.50
+      },
+      "expectedStatus": 201,
+      "expectedResponse": {
+        "success": true,
+        "message": "Ride created successfully",
+        "data": {
+          "id": "ride-uuid-format",
+          "creator_id": "user-uuid-format",
+          "origin": {
+            "latitude": 37.7749,
+            "longitude": -122.4194,
+            "address": "123 Main St, San Francisco, CA"
+          },
+          "destination": {
+            "latitude": 37.7849,
+            "longitude": -122.4094,
+            "address": "456 Market St, San Francisco, CA"
+          },
+          "seats_available": 3,
+          "price_per_seat": 15.50,
+          "status": "active",
+          "created_at": "timestamp-format",
+          "updated_at": "timestamp-format"
+        }
+      }
+    }
+  ]
+}

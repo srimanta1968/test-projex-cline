@@ -1,8 +1,8 @@
 {
   "sequence_number": 8,
-  "task_id": "852feec3-a058-4eff-9ceb-f15ba7fb4f8d",
-  "title": "Implement Notification System",
-  "description": "Create a notification system to alert users of ride matches.",
+  "task_id": "cf88934d-ad6c-49cf-b7cb-1e006194e89a",
+  "title": "Develop Matching Logic",
+  "description": "Implement the logic for matching users with drivers.",
   "task_type": "development",
   "task_role": "developer",
   "status": "pending",
@@ -19,7 +19,7 @@
     {
       "sequence_number": 1,
       "title": "Analyze requirements and plan implementation",
-      "description": "Create a notification system to alert users of ride matches.",
+      "description": "Implement the logic for matching users with drivers.",
       "status": "pending",
       "files_to_generate": [],
       "estimated_tokens": 1000,
@@ -31,7 +31,7 @@
     {
       "sequence_number": 2,
       "title": "Implement core functionality",
-      "description": "Implement Implement Notification System",
+      "description": "Implement Develop Matching Logic",
       "status": "pending",
       "files_to_generate": [
         "server/src/**/*",

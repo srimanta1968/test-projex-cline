@@ -10,217 +10,217 @@ Quick prototype sprint for generated project structure
 
 ## Epics
 
-### Mid-Journey Ride Sharing
+### Real-Time Ride Matching
 
-Develop a platform for real-time mid-journey ride sharing to maximize ride capacity and reduce costs.
+Develop a real-time ride matching system that allows users to find and join mid-journey rides seamlessly.
 
-### AI Route Optimization
+### User and Driver Management
 
-Implement AI-driven route optimization for improved ride efficiency.
+Develop a robust user and driver management system to handle registrations, profiles, and verifications.
 
-### Partnership and User Growth
+### Ride Experience Enhancement
 
-Form partnerships and grow the user base for the platform.
+Focus on enhancing the overall ride experience for users and drivers.
 
 ## Features
 
-### User Verification & Onboarding
+### User Ride Request
 
-Implement user verification processes to ensure safety and reliability of users.
+Allow users to request a ride in real-time, providing their current location and destination.
 
-### Automated Cost Splitting
+### Ride Matching Algorithm
 
-Enable automated cost-splitting for shared rides based on real-time ride metrics.
+Create an algorithm that matches users with available rides based on proximity and preferences.
 
-### Real-Time Ride Matching
+### Cost Splitting Feature
 
-Create a system for real-time matching of riders based on current locations.
+Develop a feature that automatically splits ride costs among passengers.
 
-### Route Planning Engine
+### User Registration
 
-Develop an engine that optimizes routes in real-time for pickups and drop-offs.
+Enable users to register and create profiles within the app.
 
-### Dynamic Fare Adjustments
+### Driver Verification
 
-Enable dynamic fare adjustments based on demand and supply metrics.
+Create a system for verifying driver identities and vehicle details.
 
-### Safety and Compliance Features
+### User Profile Management
 
-Integrate safety features and compliance checks into the platform.
+Allow users to manage their profiles and view ride history.
 
-### Municipal Partnerships
+### Real-Time Ride Tracking
 
-Establish partnerships with municipalities for route data access.
+Enable users to track their rides in real-time via GPS.
 
-### User Acquisition Campaigns
+### Ride Feedback System
 
-Launch marketing campaigns to acquire users effectively.
+Develop a feedback system for users to rate their ride experience.
 
-### User Retention Strategies
+### In-App Communication
 
-Implement strategies to retain users and improve engagement.
+Create a messaging system for users and drivers to communicate during rides.
 
 ## Tasks
 
-### Test and Validate Route Outputs
+### Test Matching Accuracy
 
-Conduct tests to ensure the accuracy of optimized routes.
+Conduct tests to evaluate the accuracy of the matching algorithm.
 
 **Acceptance Criteria:**
 
-### Analyze Campaign Performance
+### Test Cost Splitting Accuracy
 
-Monitor and analyze the performance of marketing campaigns.
+Conduct tests to ensure accurate cost splitting among passengers.
+
+**Acceptance Criteria:**
+
+### Test Verification System
+
+Conduct tests to ensure the verification process is secure and efficient.
+
+**Acceptance Criteria:**
+
+### Test Tracking Functionality
+
+Conduct tests to ensure GPS tracking is accurate and reliable.
+
+**Acceptance Criteria:**
+
+### Test Messaging Functionality
+
+Conduct tests to ensure messaging is reliable and secure.
+
+**Acceptance Criteria:**
+
+### Design UI for Ride Request
+
+Create an intuitive UI for users to input their ride details.
+
+**Acceptance Criteria:**
+
+### Implement Ride Request API
+
+Develop an API endpoint for submitting ride requests.
+
+**Acceptance Criteria:**
+
+### Integrate GPS Location Services
+
+Implement GPS functionality to fetch user's current location.
+
+**Acceptance Criteria:**
+
+### Research Matching Algorithms
+
+Investigate existing algorithms for ride matching efficiency.
+
+**Acceptance Criteria:**
+
+### Develop Matching Logic
+
+Implement the logic for matching users with drivers.
+
+**Acceptance Criteria:**
+
+### Design Cost Calculation Logic
+
+Create a logic for calculating shared ride costs.
+
+**Acceptance Criteria:**
+
+### Implement Cost Splitting API
+
+Develop an API endpoint for handling cost splitting.
 
 **Acceptance Criteria:**
 
 ### Design User Registration Flow
 
-Create a seamless registration flow for users including verification steps.
+Create a user-friendly registration interface.
 
 **Acceptance Criteria:**
 
-### Integrate Verification API
+### Implement User Registration API
 
-Connect to an external API for identity verification.
-
-**Acceptance Criteria:**
-
-### User Onboarding Experience
-
-Develop an onboarding tutorial for new users.
+Develop API for user registration and validation.
 
 **Acceptance Criteria:**
 
-### Implement Cost Calculation Algorithm
+### Connect to Database
 
-Develop an algorithm to calculate costs based on distance and number of passengers.
-
-**Acceptance Criteria:**
-
-### Create Payment Processing Integration
-
-Integrate payment gateways for seamless transactions.
+Ensure user data is stored securely in the database.
 
 **Acceptance Criteria:**
 
-### Build Cost Summary UI
+### Develop Driver Verification Process
 
-Design a user interface showing cost breakdown for rides.
-
-**Acceptance Criteria:**
-
-### Develop Matching Algorithm
-
-Create an algorithm to match users based on proximity and ride preferences.
+Outline the steps needed for driver verification.
 
 **Acceptance Criteria:**
 
-### Implement Notification System
+### Implement Verification API
 
-Create a notification system to alert users of ride matches.
-
-**Acceptance Criteria:**
-
-### User Feedback Mechanism
-
-Develop a feedback system for users to rate their ride experience.
+Create an API for submitting and checking driver information.
 
 **Acceptance Criteria:**
 
-### Research Route Optimization Algorithms
+### Design User Profile UI
 
-Explore various algorithms for effective route planning.
-
-**Acceptance Criteria:**
-
-### Build Route Optimization Module
-
-Develop the core module for route optimization.
+Create an interface for users to view and edit their profile.
 
 **Acceptance Criteria:**
 
-### Implement Demand Analysis Tool
+### Implement Profile Update API
 
-Create a tool to analyze ride demand in real-time.
-
-**Acceptance Criteria:**
-
-### Develop Fare Adjustment Logic
-
-Implement logic to adjust fares based on real-time data.
+Develop API for updating user profiles.
 
 **Acceptance Criteria:**
 
-### User Notification System for Fare Changes
+### Fetch Ride History Data
 
-Develop a system to notify users of fare changes.
-
-**Acceptance Criteria:**
-
-### Develop Safety Protocols
-
-Create safety protocols for shared rides including emergency contacts.
+Implement functionality to retrieve and display ride history.
 
 **Acceptance Criteria:**
 
-### Implement User Reporting System
+### Implement GPS Tracking Feature
 
-Build a system for users to report issues or concerns.
-
-**Acceptance Criteria:**
-
-### Compliance with Local Regulations
-
-Research and implement necessary compliance features for different regions.
+Develop a feature for real-time GPS tracking of rides.
 
 **Acceptance Criteria:**
 
-### Identify Potential Partners
+### Design Tracking UI
 
-Research municipalities for partnership opportunities.
-
-**Acceptance Criteria:**
-
-### Create Partnership Proposals
-
-Draft proposals for potential partnerships.
+Create a user interface for displaying ride tracking information.
 
 **Acceptance Criteria:**
 
-### Develop Partnership Agreements
+### Design Feedback Form UI
 
-Work on legal agreements for partnerships.
-
-**Acceptance Criteria:**
-
-### Design Marketing Strategy
-
-Create a comprehensive marketing strategy to attract users.
+Create an interface for users to submit feedback.
 
 **Acceptance Criteria:**
 
-### Implement Social Media Campaigns
+### Implement Feedback Submission API
 
-Launch campaigns on social media platforms to reach target demographics.
-
-**Acceptance Criteria:**
-
-### Develop User Engagement Features
-
-Create features that encourage user engagement and retention.
+Develop API for submitting ride feedback.
 
 **Acceptance Criteria:**
 
-### Implement Loyalty Programs
+### Analyze Feedback Data
 
-Design and develop loyalty programs for frequent users.
+Implement analysis tools to review feedback for improvements.
 
 **Acceptance Criteria:**
 
-### Conduct User Satisfaction Surveys
+### Design Messaging UI
 
-Gather feedback from users to improve services.
+Create a user-friendly interface for in-app messaging.
+
+**Acceptance Criteria:**
+
+### Implement Messaging API
+
+Develop an API for sending and receiving messages.
 
 **Acceptance Criteria:**
 

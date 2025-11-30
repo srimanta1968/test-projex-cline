@@ -1,8 +1,8 @@
 {
   "sequence_number": 18,
-  "task_id": "ad1fb434-c2d7-42b0-93e7-795dcdf6c78f",
-  "title": "Design Marketing Strategy",
-  "description": "Create a comprehensive marketing strategy to attract users.",
+  "task_id": "f20c30b3-08d6-4f28-822c-3d7a7a34ed3a",
+  "title": "Implement Messaging API",
+  "description": "Develop an API for sending and receiving messages.",
   "task_type": "development",
   "task_role": "developer",
   "status": "pending",
@@ -19,7 +19,7 @@
     {
       "sequence_number": 1,
       "title": "Analyze requirements and plan implementation",
-      "description": "Create a comprehensive marketing strategy to attract users.",
+      "description": "Develop an API for sending and receiving messages.",
       "status": "pending",
       "files_to_generate": [],
       "estimated_tokens": 1000,
@@ -31,7 +31,7 @@
     {
       "sequence_number": 2,
       "title": "Implement core functionality",
-      "description": "Implement Design Marketing Strategy",
+      "description": "Implement Implement Messaging API",
       "status": "pending",
       "files_to_generate": [
         "server/src/**/*",

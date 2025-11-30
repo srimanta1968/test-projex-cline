@@ -1,8 +1,8 @@
 {
   "sequence_number": 14,
-  "task_id": "1a1db1d2-d699-4a33-97bd-4c95c00bca81",
-  "title": "Develop Safety Protocols",
-  "description": "Create safety protocols for shared rides including emergency contacts.",
+  "task_id": "0bd182d5-0c73-4a81-b65b-f4cd6f8f01a5",
+  "title": "Fetch Ride History Data",
+  "description": "Implement functionality to retrieve and display ride history.",
   "task_type": "development",
   "task_role": "developer",
   "status": "pending",
@@ -19,7 +19,7 @@
     {
       "sequence_number": 1,
       "title": "Analyze requirements and plan implementation",
-      "description": "Create safety protocols for shared rides including emergency contacts.",
+      "description": "Implement functionality to retrieve and display ride history.",
       "status": "pending",
       "files_to_generate": [],
       "estimated_tokens": 1000,
@@ -31,7 +31,7 @@
     {
       "sequence_number": 2,
       "title": "Implement core functionality",
-      "description": "Implement Develop Safety Protocols",
+      "description": "Implement Fetch Ride History Data",
       "status": "pending",
       "files_to_generate": [
         "server/src/**/*",

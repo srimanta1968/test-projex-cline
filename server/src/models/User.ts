@@ -1,12 +1,15 @@
+import { v4 as uuidv4 } from 'uuid';
 import pool from '../config/database';
 
 export interface User {
   id: string;
   email: string;
   username: string;
-  password_hash: string;
+  password_hash?: string; // Made optional for sanitized responses
   first_name: string;
   last_name: string;
+  phone?: string;
+  verified: boolean;
   created_at: Date;
   updated_at: Date;
 }
@@ -17,12 +20,14 @@ export interface CreateUserData {
   password_hash: string;
   first_name: string;
   last_name: string;
+  phone?: string;
 }
 
 export interface UpdateUserData {
   first_name?: string;
   last_name?: string;
-  email?: string;
+  phone?: string;
+  verified?: boolean;
 }
 
 export class UserModel {
@@ -30,18 +35,27 @@ export class UserModel {
    * Create a new user
    */
   static async create(userData: CreateUserData): Promise<User> {
+    const { email, username, password_hash, first_name, last_name, phone } = userData;
+    const id = uuidv4();
+    const now = new Date();
+
     const query = `
-      INSERT INTO users (email, username, password_hash, first_name, last_name)
-      VALUES ($1, $2, $3, $4, $5)
-      RETURNING id, email, username, first_name, last_name, created_at, updated_at
+      INSERT INTO users (id, email, username, password_hash, first_name, last_name, phone, verified, created_at, updated_at)
+      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
+      RETURNING *
     `;
 
     const values = [
-      userData.email,
-      userData.username,
-      userData.password_hash,
-      userData.first_name,
-      userData.last_name
+      id,
+      email.toLowerCase(),
+      username.toLowerCase(),
+      password_hash,
+      first_name,
+      last_name,
+      phone || null,
+      false, // verified defaults to false
+      now,
+      now
     ];
 
     try {
@@ -49,26 +63,7 @@ export class UserModel {
       return result.rows[0];
     } catch (error) {
       console.error('Error creating user:', error);
-      throw new Error('Failed to create user');
-    }
-  }
-
-  /**
-   * Find user by email
-   */
-  static async findByEmail(email: string): Promise<User | null> {
-    const query = `
-      SELECT id, email, username, password_hash, first_name, last_name, created_at, updated_at
-      FROM users
-      WHERE email = $1
-    `;
-
-    try {
-      const result = await pool.query(query, [email]);
-      return result.rows[0] || null;
-    } catch (error) {
-      console.error('Error finding user by email:', error);
-      throw new Error('Failed to find user');
+      throw error;
     }
   }
 
@@ -76,18 +71,29 @@ export class UserModel {
    * Find user by ID
    */
   static async findById(id: string): Promise<User | null> {
-    const query = `
-      SELECT id, email, username, password_hash, first_name, last_name, created_at, updated_at
-      FROM users
-      WHERE id = $1
-    `;
+    const query = 'SELECT * FROM users WHERE id = $1';
 
     try {
       const result = await pool.query(query, [id]);
       return result.rows[0] || null;
     } catch (error) {
       console.error('Error finding user by ID:', error);
-      throw new Error('Failed to find user');
+      throw error;
+    }
+  }
+
+  /**
+   * Find user by email
+   */
+  static async findByEmail(email: string): Promise<User | null> {
+    const query = 'SELECT * FROM users WHERE email = $1';
+
+    try {
+      const result = await pool.query(query, [email.toLowerCase()]);
+      return result.rows[0] || null;
+    } catch (error) {
+      console.error('Error finding user by email:', error);
+      throw error;
     }
   }
 
@@ -95,18 +101,29 @@ export class UserModel {
    * Find user by username
    */
   static async findByUsername(username: string): Promise<User | null> {
-    const query = `
-      SELECT id, email, username, password_hash, first_name, last_name, created_at, updated_at
-      FROM users
-      WHERE username = $1
-    `;
+    const query = 'SELECT * FROM users WHERE username = $1';
 
     try {
-      const result = await pool.query(query, [username]);
+      const result = await pool.query(query, [username.toLowerCase()]);
       return result.rows[0] || null;
     } catch (error) {
       console.error('Error finding user by username:', error);
-      throw new Error('Failed to find user');
+      throw error;
+    }
+  }
+
+  /**
+   * Find user by email or username (for login)
+   */
+  static async findByEmailOrUsername(identifier: string): Promise<User | null> {
+    const query = 'SELECT * FROM users WHERE email = $1 OR username = $1';
+
+    try {
+      const result = await pool.query(query, [identifier.toLowerCase()]);
+      return result.rows[0] || null;
+    } catch (error) {
+      console.error('Error finding user by email or username:', error);
+      throw error;
     }
   }
 
@@ -114,37 +131,47 @@ export class UserModel {
    * Update user information
    */
   static async update(id: string, updateData: UpdateUserData): Promise<User | null> {
-    const fields = [];
-    const values = [];
-    let paramIndex = 1;
+    const { first_name, last_name, phone, verified } = updateData;
+    const now = new Date();
 
-    if (updateData.first_name !== undefined) {
-      fields.push(`first_name = $${paramIndex++}`);
-      values.push(updateData.first_name);
+    const updateFields: string[] = [];
+    const values: any[] = [];
+    let paramCount = 1;
+
+    if (first_name !== undefined) {
+      updateFields.push(`first_name = $${paramCount++}`);
+      values.push(first_name);
     }
 
-    if (updateData.last_name !== undefined) {
-      fields.push(`last_name = $${paramIndex++}`);
-      values.push(updateData.last_name);
+    if (last_name !== undefined) {
+      updateFields.push(`last_name = $${paramCount++}`);
+      values.push(last_name);
     }
 
-    if (updateData.email !== undefined) {
-      fields.push(`email = $${paramIndex++}`);
-      values.push(updateData.email);
+    if (phone !== undefined) {
+      updateFields.push(`phone = $${paramCount++}`);
+      values.push(phone);
     }
 
-    if (fields.length === 0) {
+    if (verified !== undefined) {
+      updateFields.push(`verified = $${paramCount++}`);
+      values.push(verified);
+    }
+
+    if (updateFields.length === 0) {
       throw new Error('No fields to update');
     }
 
-    fields.push(`updated_at = NOW()`);
-    values.push(id); // Add id at the end
+    updateFields.push(`updated_at = $${paramCount++}`);
+    values.push(now);
+
+    values.push(id); // WHERE clause
 
     const query = `
       UPDATE users
-      SET ${fields.join(', ')}
-      WHERE id = $${paramIndex}
-      RETURNING id, email, username, first_name, last_name, created_at, updated_at
+      SET ${updateFields.join(', ')}
+      WHERE id = $${paramCount}
+      RETURNING *
     `;
 
     try {
@@ -152,7 +179,7 @@ export class UserModel {
       return result.rows[0] || null;
     } catch (error) {
       console.error('Error updating user:', error);
-      throw new Error('Failed to update user');
+      throw error;
     }
   }
 
@@ -160,14 +187,61 @@ export class UserModel {
    * Delete user
    */
   static async delete(id: string): Promise<boolean> {
-    const query = 'DELETE FROM users WHERE id = $1';
+    const query = 'DELETE FROM users WHERE id = $1 RETURNING id';
 
     try {
       const result = await pool.query(query, [id]);
-      return (result.rowCount ?? 0) > 0;
+      return (result.rowCount || 0) > 0;
     } catch (error) {
       console.error('Error deleting user:', error);
-      throw new Error('Failed to delete user');
+      throw error;
+    }
+  }
+
+  /**
+   * Get all users (with pagination)
+   */
+  static async findAll(limit: number = 50, offset: number = 0): Promise<User[]> {
+    const query = 'SELECT * FROM users ORDER BY created_at DESC LIMIT $1 OFFSET $2';
+
+    try {
+      const result = await pool.query(query, [limit, offset]);
+      return result.rows;
+    } catch (error) {
+      console.error('Error finding all users:', error);
+      throw error;
+    }
+  }
+
+  /**
+   * Check if email exists
+   */
+  static async emailExists(email: string): Promise<boolean> {
+    const query = 'SELECT id FROM users WHERE email = $1 LIMIT 1';
+
+    try {
+      const result = await pool.query(query, [email.toLowerCase()]);
+      return result.rows.length > 0;
+    } catch (error) {
+      console.error('Error checking email existence:', error);
+      throw error;
+    }
+  }
+
+  /**
+   * Check if username exists
+   */
+  static async usernameExists(username: string): Promise<boolean> {
+    const query = 'SELECT id FROM users WHERE username = $1 LIMIT 1';
+
+    try {
+      const result = await pool.query(query, [username.toLowerCase()]);
+      return result.rows.length > 0;
+    } catch (error) {
+      console.error('Error checking username existence:', error);
+      throw error;
     }
   }
 }
+
+export default UserModel;
