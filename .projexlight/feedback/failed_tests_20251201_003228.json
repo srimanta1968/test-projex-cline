@@ -1,0 +1,43 @@
+{
+  "type": "failed_tests",
+  "timestamp": "2025-12-01T00:32:28.395295",
+  "totalFailures": 5,
+  "instructions": [
+    {
+      "endpoint": "POST /api/rides/:id/join",
+      "issue": "Test failed with status 400",
+      "errorMessage": "Status 400 - Error: Validation failed",
+      "suggestedFix": "Check request validation - likely invalid input format or missing required fields",
+      "priority": "high"
+    },
+    {
+      "endpoint": "DELETE /api/rides/:id/join",
+      "issue": "Test failed with status 500",
+      "errorMessage": "Status 500 - Error: Internal server error",
+      "suggestedFix": "Server error - check logs for stack trace and fix internal error",
+      "priority": "high"
+    },
+    {
+      "endpoint": "PUT /api/rides/:id/status",
+      "issue": "Test failed with status 400",
+      "errorMessage": "Status 400 - Error: Validation failed",
+      "suggestedFix": "Check request validation - likely invalid input format or missing required fields",
+      "priority": "high"
+    },
+    {
+      "endpoint": "GET /api/rides/:id/calculate-cost",
+      "issue": "Test failed with status 400",
+      "errorMessage": "Status 400 - Error: Validation failed",
+      "suggestedFix": "Check request validation - likely invalid input format or missing required fields",
+      "priority": "high"
+    },
+    {
+      "endpoint": "POST /api/rides/:id/payment",
+      "issue": "Test failed with status 400",
+      "errorMessage": "Status 400 - Error: Validation failed",
+      "suggestedFix": "Check request validation - likely invalid input format or missing required fields",
+      "priority": "high"
+    }
+  ],
+  "llm_prompt": "# Failed API Tests - Fix Required\n\n5 API test(s) failed. Please review and fix the following issues:\n\n## Failed Tests:\n\n### Issue 1:\n- **endpoint**: POST /api/rides/:id/join\n- **issue**: Test failed with status 400\n- **errorMessage**: Status 400 - Error: Validation failed\n- **suggestedFix**: Check request validation - likely invalid input format or missing required fields\n\n### Issue 2:\n- **endpoint**: DELETE /api/rides/:id/join\n- **issue**: Test failed with status 500\n- **errorMessage**: Status 500 - Error: Internal server error\n- **suggestedFix**: Server error - check logs for stack trace and fix internal error\n\n### Issue 3:\n- **endpoint**: PUT /api/rides/:id/status\n- **issue**: Test failed with status 400\n- **errorMessage**: Status 400 - Error: Validation failed\n- **suggestedFix**: Check request validation - likely invalid input format or missing required fields\n\n### Issue 4:\n- **endpoint**: GET /api/rides/:id/calculate-cost\n- **issue**: Test failed with status 400\n- **errorMessage**: Status 400 - Error: Validation failed\n- **suggestedFix**: Check request validation - likely invalid input format or missing required fields\n\n### Issue 5:\n- **endpoint**: POST /api/rides/:id/payment\n- **issue**: Test failed with status 400\n- **errorMessage**: Status 400 - Error: Validation failed\n- **suggestedFix**: Check request validation - likely invalid input format or missing required fields\n\n## Instructions:\n1. Review each failed endpoint\n2. Check the error messages and status codes\n3. Implement the suggested fixes\n4. Re-run tests to verify fixes\n5. Ensure all tests pass before committing\n\n## Priority:\nHIGH - These failures may block deployment"
+}
