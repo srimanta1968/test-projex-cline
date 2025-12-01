@@ -8,19 +8,19 @@
     {
       "name": "Happy path - join ride successfully",
       "pathParams": {
-        "id": "ride-uuid-format"
+        "id": "{{cache:ride.id}}"
       },
       "expectedStatus": 200,
       "expectedResponse": {
         "success": true,
         "message": "Successfully joined the ride",
         "data": {
-          "ride_id": "ride-uuid-format",
-          "user_id": "current-user-uuid",
-          "status": "joined",
-          "joined_at": "timestamp-format",
+          "ride_id": "{{cache:ride.id}}",
+          "user_id": "{{cache:auth.user_id}}",
+          "status": "active",
+          "joined_at": "2024-01-15T10:30:00Z",
           "ride": {
-            "id": "ride-uuid-format",
+            "id": "{{cache:ride.id}}",
             "origin": {
               "latitude": 37.7749,
               "longitude": -122.4194,

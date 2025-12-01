@@ -9,105 +9,109 @@
 -- Version: 1
 -- ========================================
 
-CREATE TABLE IF NOT EXISTS ride_requests (
+CREATE TABLE IF NOT EXISTS matches (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-  user_id UUID,
-  start_location VARCHAR(255),
-  end_location VARCHAR(255),
-  timestamp TIMESTAMP WITH TIME ZONE,
-  created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
-  updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
-);
-
-COMMENT ON TABLE ride_requests IS 'Schema: Rider App Schema - Entity: Ride_requests';
-
-CREATE TABLE IF NOT EXISTS ride_matches (
-  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-  request_id UUID,
+  rider_id UUID,
   driver_id UUID,
-  matched_time VARCHAR(255),
+  match_time VARCHAR(255),
+  status VARCHAR(255),
   created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
   updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
 
-COMMENT ON TABLE ride_matches IS 'Schema: Rider App Schema - Entity: Ride_matches';
+COMMENT ON TABLE matches IS 'Schema: Rider App Schema - Entity: Matches';
 
-CREATE TABLE IF NOT EXISTS ride_costs (
-  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-  ride_id UUID,
-  total_cost DECIMAL(10,2),
-  split_cost DECIMAL(10,2),
-  created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
-  updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
-);
-
-COMMENT ON TABLE ride_costs IS 'Schema: Rider App Schema - Entity: Ride_costs';
-
-CREATE TABLE IF NOT EXISTS users (
-  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-  name VARCHAR(255),
-  email VARCHAR(255),
-  password_hash VARCHAR(255),
-  created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
-  updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
-);
-
-COMMENT ON TABLE users IS 'Schema: Rider App Schema - Entity: Users';
-
-CREATE TABLE IF NOT EXISTS drivers (
-  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-  user_id UUID,
-  vehicle_id UUID,
-  verification_status VARCHAR(255),
-  created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
-  updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
-);
-
-COMMENT ON TABLE drivers IS 'Schema: Rider App Schema - Entity: Drivers';
-
-CREATE TABLE IF NOT EXISTS ride_history (
-  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-  user_id UUID,
-  ride_id UUID,
-  timestamp TIMESTAMP WITH TIME ZONE,
-  created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
-  updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
-);
-
-COMMENT ON TABLE ride_history IS 'Schema: Rider App Schema - Entity: Ride_history';
-
-CREATE TABLE IF NOT EXISTS ride_tracking (
-  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-  ride_id UUID,
-  location_data VARCHAR(255),
-  timestamp TIMESTAMP WITH TIME ZONE,
-  created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
-  updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
-);
-
-COMMENT ON TABLE ride_tracking IS 'Schema: Rider App Schema - Entity: Ride_tracking';
-
-CREATE TABLE IF NOT EXISTS ride_feedback (
+CREATE TABLE IF NOT EXISTS cost_splits (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   ride_id UUID,
   user_id UUID,
+  amount DECIMAL(10,2),
+  split_time VARCHAR(255),
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+
+COMMENT ON TABLE cost_splits IS 'Schema: Rider App Schema - Entity: Cost_splits';
+
+CREATE TABLE IF NOT EXISTS feedback (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  user_id UUID,
+  ride_id UUID,
   rating VARCHAR(255),
   comments VARCHAR(255),
+  submitted_at TIMESTAMP WITH TIME ZONE,
   created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
   updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
 
-COMMENT ON TABLE ride_feedback IS 'Schema: Rider App Schema - Entity: Ride_feedback';
+COMMENT ON TABLE feedback IS 'Schema: Rider App Schema - Entity: Feedback';
 
-CREATE TABLE IF NOT EXISTS messages (
+CREATE TABLE IF NOT EXISTS routes (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-  sender_id UUID,
-  receiver_id UUID,
-  content TEXT,
-  timestamp TIMESTAMP WITH TIME ZONE,
+  ride_id UUID,
+  start_location VARCHAR(255),
+  end_location VARCHAR(255),
+  optimized_route VARCHAR(255),
   created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
   updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
 
-COMMENT ON TABLE messages IS 'Schema: Rider App Schema - Entity: Messages';
+COMMENT ON TABLE routes IS 'Schema: Rider App Schema - Entity: Routes';
+
+CREATE TABLE IF NOT EXISTS user_preferences (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  user_id UUID,
+  preferred_pickup VARCHAR(255),
+  preferred_dropoff VARCHAR(255),
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+
+COMMENT ON TABLE user_preferences IS 'Schema: Rider App Schema - Entity: User_preferences';
+
+CREATE TABLE IF NOT EXISTS insurance (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  provider_name VARCHAR(255),
+  coverage_details VARCHAR(255),
+  cost DECIMAL(10,2),
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+
+COMMENT ON TABLE insurance IS 'Schema: Rider App Schema - Entity: Insurance';
+
+CREATE TABLE IF NOT EXISTS referrals (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  referrer_id UUID,
+  referree_id UUID,
+  status VARCHAR(255),
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+
+COMMENT ON TABLE referrals IS 'Schema: Rider App Schema - Entity: Referrals';
+
+CREATE TABLE IF NOT EXISTS social_media_shares (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  user_id UUID,
+  ride_id UUID,
+  platform VARCHAR(255),
+  share_time VARCHAR(255),
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+
+COMMENT ON TABLE social_media_shares IS 'Schema: Rider App Schema - Entity: Social_media_shares';
+
+CREATE TABLE IF NOT EXISTS loyalty_program (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  user_id UUID,
+  points VARCHAR(255),
+  tier VARCHAR(255),
+  last_updated TIMESTAMP WITH TIME ZONE,
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+
+COMMENT ON TABLE loyalty_program IS 'Schema: Rider App Schema - Entity: Loyalty_program';
 

@@ -233,15 +233,34 @@ When creating the ONE happy path test case:
    - Use realistic sample data
    - DO NOT use placeholder values like "test@test.com"
 
-3. **Standard formats to use:**
+3. **🆕 DECLARATIVE DYNAMIC FIELD SYNTAX (RECOMMENDED):**
+
+   Use special placeholders to explicitly mark fields that need dynamic values:
+
+   **Placeholder Types:**
+   - `{{dynamic:email}}` → MCP generates unique email (e.g., testuser_123456@example.com)
+   - `{{dynamic:username}}` → MCP generates unique username (e.g., testuser_123456)
+   - `{{dynamic:phone}}` → MCP generates unique phone number
+   - `{{dynamic:uuid}}` → MCP generates unique UUID
+   - `{{cache:auth.email}}` → Uses email from previous registration (for login)
+   - `{{cache:auth.password}}` → Uses password from previous registration (for login)
+   - `{{cache:auth.token}}` → Uses auth token from previous login
+   - `{{static:Value}}` → Keep exact value (e.g., {{static:SecurePass123!}})
+
+   **When to use each:**
+   - Register endpoint → Use `{{dynamic:...}}` for email, username
+   - Login endpoint → Use `{{cache:auth.email}}`, `{{cache:auth.password}}`
+   - Static values (password, names) → Use `{{static:...}}`
+
+4. **Standard formats (when NOT using placeholders):**
    - Email: `user@example.com`, `john.doe@example.com`
    - Phone: `+15550123456` (E.164 format)
    - Date: `1990-05-15` (ISO 8601)
    - Password: `SecurePassword123!` (meets strength requirements)
    - UUID: `123e4567-e89b-12d3-a456-426614174000`
 
-4. **MCP Runtime Behavior (Automatic - You Don't Need to Worry)**
-   - 🤖 MCP server will generate UNIQUE test data dynamically
+5. **MCP Runtime Behavior (Automatic)**
+   - 🤖 MCP server processes placeholders and generates unique test data
    - 🔗 MCP automatically chains authentication flows (register → login → use token)
    - 📊 MCP captures request/response and updates `api_library` table
    - ✅ Your test will PASS even on repeated runs (no "user already exists" errors)
@@ -265,11 +284,11 @@ File: `tests/api_definitions/auth/register.json`
     {
       "name": "Happy path - successful registration",
       "payload": {
-        "email": "user@example.com",
-        "username": "johndoe",
-        "password": "SecurePass123!",
-        "first_name": "John",
-        "last_name": "Doe"
+        "email": "{{dynamic:email}}",
+        "username": "{{dynamic:username}}",
+        "password": "{{static:SecurePass123!}}",
+        "first_name": "{{static:John}}",
+        "last_name": "{{static:Doe}}"
       },
       "expectedStatus": 201,
       "expectedResponse": {
@@ -369,6 +388,36 @@ router.post('/api/auth/register', [
   ]
 }
 ```
+
+**Login Endpoint Example (using {{cache:...}} for credentials):**
+```json
+{
+  "endpoint": "/api/auth/login",
+  "method": "POST",
+  "description": "Authenticate user and return tokens",
+  "requiresAuth": false,
+  "tags": ["auth", "login"],
+  "testCases": [
+    {
+      "name": "Happy path - successful login",
+      "payload": {
+        "identifier": "{{cache:auth.email}}",
+        "password": "{{cache:auth.password}}"
+      },
+      "expectedStatus": 200,
+      "expectedResponse": {
+        "success": true,
+        "message": "Login successful",
+        "data": {
+          "user": { "id": "...", "email": "..." },
+          "tokens": { "accessToken": "..." }
+        }
+      }
+    }
+  ]
+}
+```
+**Note:** Login uses `{{cache:auth.email}}` and `{{cache:auth.password}}` to reference the credentials created during registration.
 
 **Protected Endpoints Example (with expectedResponse):**
 ```json

@@ -7,18 +7,13 @@
   "testCases": [
     {
       "name": "Happy path - get available rides",
-      "queryParams": {
-        "status": "active",
-        "limit": 10,
-        "offset": 0
-      },
       "expectedStatus": 200,
       "expectedResponse": {
         "success": true,
         "data": [
           {
-            "id": "ride-uuid-1",
-            "creator_id": "user-uuid-1",
+            "id": "123e4567-e89b-12d3-a456-426614174000",
+            "creator_id": "{{cache:auth.user_id}}",
             "origin": {
               "latitude": 37.7749,
               "longitude": -122.4194,
@@ -32,13 +27,13 @@
             "seats_available": 3,
             "price_per_seat": 15.50,
             "status": "active",
-            "created_at": "timestamp-format",
-            "updated_at": "timestamp-format",
+            "created_at": "2024-01-15T10:30:00Z",
+            "updated_at": "2024-01-15T10:30:00Z",
             "creator": {
-              "id": "user-uuid-1",
+              "id": "{{cache:auth.user_id}}",
               "first_name": "John",
               "last_name": "Doe",
-              "verified": true
+              "verified": false
             }
           }
         ],

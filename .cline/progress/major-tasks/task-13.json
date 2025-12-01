@@ -1,8 +1,8 @@
 {
   "sequence_number": 13,
-  "task_id": "67d1b497-ee71-4b46-bed9-92e9c760aba4",
-  "title": "Implement Profile Update API",
-  "description": "Develop API for updating user profiles.",
+  "task_id": "51dc78e5-4096-4acf-aa11-eec193efae9f",
+  "title": "Implement User Preference Saving",
+  "description": "Allow users to save their preferred pick-up and drop-off locations.",
   "task_type": "development",
   "task_role": "developer",
   "status": "pending",
@@ -19,7 +19,7 @@
     {
       "sequence_number": 1,
       "title": "Analyze requirements and plan implementation",
-      "description": "Develop API for updating user profiles.",
+      "description": "Allow users to save their preferred pick-up and drop-off locations.",
       "status": "pending",
       "files_to_generate": [],
       "estimated_tokens": 1000,
@@ -31,7 +31,7 @@
     {
       "sequence_number": 2,
       "title": "Implement core functionality",
-      "description": "Implement Implement Profile Update API",
+      "description": "Implement Implement User Preference Saving",
       "status": "pending",
       "files_to_generate": [
         "server/src/**/*",

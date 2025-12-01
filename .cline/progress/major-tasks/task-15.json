@@ -1,8 +1,8 @@
 {
   "sequence_number": 15,
-  "task_id": "80f071bf-e370-4d00-ac08-2a5b78e770d1",
-  "title": "Implement GPS Tracking Feature",
-  "description": "Develop a feature for real-time GPS tracking of rides.",
+  "task_id": "c0c22664-5756-4554-abbf-2ffce7df8247",
+  "title": "Analyze Preferences for Recommendations",
+  "description": "Analyze user preferences to recommend rides and features.",
   "task_type": "development",
   "task_role": "developer",
   "status": "pending",
@@ -19,7 +19,7 @@
     {
       "sequence_number": 1,
       "title": "Analyze requirements and plan implementation",
-      "description": "Develop a feature for real-time GPS tracking of rides.",
+      "description": "Analyze user preferences to recommend rides and features.",
       "status": "pending",
       "files_to_generate": [],
       "estimated_tokens": 1000,
@@ -31,7 +31,7 @@
     {
       "sequence_number": 2,
       "title": "Implement core functionality",
-      "description": "Implement Implement GPS Tracking Feature",
+      "description": "Implement Analyze Preferences for Recommendations",
       "status": "pending",
       "files_to_generate": [
         "server/src/**/*",

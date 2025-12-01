@@ -2,10 +2,10 @@
   "project_type": "node",
   "framework": "Express.js",
   "language": "javascript",
-  "server_port": 5000,
+  "server_port": 3000,
   "health_endpoint": "/health",
   "install_command": "npm install",
   "build_command": "",
   "start_command": "npm run dev || npm start",
-  "generated_at": "2025-11-29T05:04:27.715Z"
+  "generated_at": "2025-11-30T23:12:37.093Z"
 }

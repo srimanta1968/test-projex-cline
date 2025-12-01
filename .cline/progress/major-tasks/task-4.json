@@ -1,30 +1,27 @@
 {
   "sequence_number": 4,
-  "task_id": "ba53b394-f714-4234-bc90-3328e40595b2",
-  "title": "Test Tracking Functionality",
-  "description": "Conduct tests to ensure GPS tracking is accurate and reliable.",
-  "task_type": "testing",
+  "task_id": "e2c5ab32-1471-4d94-984e-7da12a382b6f",
+  "title": "Create User Interface for Matching",
+  "description": "Design and implement the UI for displaying matched rides to users.",
+  "task_type": "development",
   "task_role": "developer",
   "status": "pending",
   "started_at": null,
   "completed_at": null,
-  "total_sub_tasks": 4,
+  "total_sub_tasks": 3,
   "completed_sub_tasks": 0,
   "in_progress_sub_tasks": 0,
-  "pending_sub_tasks": 4,
+  "pending_sub_tasks": 3,
   "current_sub_task_index": 1,
   "acceptance_criteria": [],
   "acceptance_criteria_met": [],
   "sub_tasks": [
     {
       "sequence_number": 1,
-      "title": "Set up test environment and configuration",
-      "description": "Configure Jest, testing libraries, and test database",
+      "title": "Analyze requirements and plan implementation",
+      "description": "Design and implement the UI for displaying matched rides to users.",
       "status": "pending",
-      "files_to_generate": [
-        "jest.config.js",
-        "tests/utils/*.ts"
-      ],
+      "files_to_generate": [],
       "estimated_tokens": 1000,
       "started_at": null,
       "completed_at": null,
@@ -33,13 +30,12 @@
     },
     {
       "sequence_number": 2,
-      "title": "Write unit tests for all components/services",
-      "description": "Create comprehensive unit test coverage",
+      "title": "Implement core functionality",
+      "description": "Implement Create User Interface for Matching",
       "status": "pending",
       "files_to_generate": [
-        "tests/**/*.test.ts",
-        "server/tests/**/*.test.ts",
-        "client/tests/**/*.test.ts"
+        "server/src/**/*",
+        "client/src/**/*"
       ],
       "estimated_tokens": 3000,
       "started_at": null,
@@ -49,27 +45,11 @@
     },
     {
       "sequence_number": 3,
-      "title": "Write integration tests for API flows",
-      "description": "Test complete user flows and API integrations",
+      "title": "Test and validate implementation",
+      "description": "Test the implementation against acceptance criteria",
       "status": "pending",
-      "files_to_generate": [
-        "tests/integration/*.test.ts"
-      ],
-      "estimated_tokens": 2500,
-      "started_at": null,
-      "completed_at": null,
-      "files_generated": [],
-      "notes": ""
-    },
-    {
-      "sequence_number": 4,
-      "title": "Document test results and coverage",
-      "description": "Generate coverage reports and document test results",
-      "status": "pending",
-      "files_to_generate": [
-        "TEST_RESULTS.md"
-      ],
-      "estimated_tokens": 500,
+      "files_to_generate": [],
+      "estimated_tokens": 1000,
       "started_at": null,
       "completed_at": null,
       "files_generated": [],

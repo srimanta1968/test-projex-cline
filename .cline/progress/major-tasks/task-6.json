@@ -1,8 +1,8 @@
 {
   "sequence_number": 6,
-  "task_id": "1baad5eb-86f8-4bba-bb15-ee51fc7971b5",
-  "title": "Implement Ride Request API",
-  "description": "Develop an API endpoint for submitting ride requests.",
+  "task_id": "fb80348a-01b8-4bbc-a82c-94a7b63de8c1",
+  "title": "Implement Cost Splitting Feature",
+  "description": "Develop functionality to split the fare among multiple riders.",
   "task_type": "development",
   "task_role": "developer",
   "status": "pending",
@@ -19,7 +19,7 @@
     {
       "sequence_number": 1,
       "title": "Analyze requirements and plan implementation",
-      "description": "Develop an API endpoint for submitting ride requests.",
+      "description": "Develop functionality to split the fare among multiple riders.",
       "status": "pending",
       "files_to_generate": [],
       "estimated_tokens": 1000,
@@ -31,7 +31,7 @@
     {
       "sequence_number": 2,
       "title": "Implement core functionality",
-      "description": "Implement Implement Ride Request API",
+      "description": "Implement Implement Cost Splitting Feature",
       "status": "pending",
       "files_to_generate": [
         "server/src/**/*",

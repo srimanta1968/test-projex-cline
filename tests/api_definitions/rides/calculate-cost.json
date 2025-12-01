@@ -6,15 +6,15 @@
   "tags": ["rides", "cost", "calculation"],
   "testCases": [
     {
-      "name": "Happy path - calculate cost for ride with 2 passengers",
+      "name": "Happy path - calculate cost for ride",
       "pathParams": {
-        "id": "ride-uuid-format"
+        "id": "{{cache:ride.id}}"
       },
       "expectedStatus": 200,
       "expectedResponse": {
         "success": true,
         "data": {
-          "ride_id": "ride-uuid-format",
+          "ride_id": "{{cache:ride.id}}",
           "base_fare": 10.00,
           "distance_fare": 5.50,
           "passenger_count": 2,

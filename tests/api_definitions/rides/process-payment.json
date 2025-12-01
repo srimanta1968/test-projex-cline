@@ -8,7 +8,7 @@
     {
       "name": "Happy path - process payment for completed ride",
       "pathParams": {
-        "id": "ride-uuid-format"
+        "id": "{{cache:ride.id}}"
       },
       "payload": {
         "payment_method": "card",
@@ -19,21 +19,16 @@
         "success": true,
         "message": "Payment processed successfully",
         "data": {
-          "ride_id": "ride-uuid-format",
+          "ride_id": "{{cache:ride.id}}",
           "total_amount": 15.50,
           "passenger_payments": [
             {
-              "user_id": "passenger-uuid-1",
-              "amount": 7.75,
-              "status": "completed"
-            },
-            {
-              "user_id": "passenger-uuid-2",
+              "user_id": "{{cache:auth.user_id}}",
               "amount": 7.75,
               "status": "completed"
             }
           ],
-          "transaction_id": "txn-uuid-format",
+          "transaction_id": "123e4567-e89b-12d3-a456-426614174000",
           "payment_status": "completed"
         }
       }

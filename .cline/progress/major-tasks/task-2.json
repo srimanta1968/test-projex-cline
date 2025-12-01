@@ -1,8 +1,8 @@
 {
   "sequence_number": 2,
-  "task_id": "db94492f-77e6-4f7b-b33d-2b69a61235f1",
-  "title": "Test Cost Splitting Accuracy",
-  "description": "Conduct tests to ensure accurate cost splitting among passengers.",
+  "task_id": "ffea3157-9abb-47ec-a7de-25f00b42d8b5",
+  "title": "Test Route Adjustment Functionality",
+  "description": "Conduct tests to ensure the routing system adjusts accurately.",
   "task_type": "testing",
   "task_role": "developer",
   "status": "pending",

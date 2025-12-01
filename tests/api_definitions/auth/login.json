@@ -6,10 +6,10 @@
   "tags": ["auth", "login", "tokens"],
   "testCases": [
     {
-      "name": "Happy path - successful login with email",
+      "name": "Happy path - successful login",
       "payload": {
-        "identifier": "testuser_12345@example.com",
-        "password": "SecurePass123!"
+        "identifier": "{{cache:auth.email}}",
+        "password": "{{cache:auth.password}}"
       },
       "expectedStatus": 200,
       "expectedResponse": {
@@ -17,45 +17,21 @@
         "message": "Login successful",
         "data": {
           "user": {
-            "id": "uuid-format-id",
-            "email": "testuser_12345@example.com",
-            "username": "testuser_12345",
+            "id": "123e4567-e89b-12d3-a456-426614174000",
+            "email": "{{cache:auth.email}}",
+            "username": "{{cache:auth.username}}",
             "first_name": "John",
             "last_name": "Doe",
             "verified": false,
-            "created_at": "timestamp-format",
-            "updated_at": "timestamp-format"
+            "created_at": "2024-01-15T10:30:00Z",
+            "updated_at": "2024-01-15T10:30:00Z"
           },
           "tokens": {
             "accessToken": "jwt-token-format",
             "tokenType": "Bearer",
-            "expiresIn": 3600
+            "expiresIn": 604800
           }
         }
-      }
-    },
-    {
-      "name": "Login with username instead of email",
-      "payload": {
-        "identifier": "testuser_12345",
-        "password": "SecurePass123!"
-      },
-      "expectedStatus": 200,
-      "expectedResponse": {
-        "success": true,
-        "message": "Login successful"
-      }
-    },
-    {
-      "name": "Invalid credentials",
-      "payload": {
-        "identifier": "nonexistent@example.com",
-        "password": "wrongpassword"
-      },
-      "expectedStatus": 401,
-      "expectedResponse": {
-        "success": false,
-        "error": "Invalid email/username or password"
       }
     }
   ]

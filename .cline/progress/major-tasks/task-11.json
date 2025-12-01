@@ -1,8 +1,8 @@
 {
   "sequence_number": 11,
-  "task_id": "d1cca75e-8abd-4da4-aa7c-b5dcf51c6606",
-  "title": "Connect to Database",
-  "description": "Ensure user data is stored securely in the database.",
+  "task_id": "46a89b65-3ff7-4dd3-87bf-14ac5e4f85bb",
+  "title": "Integrate Traffic Data Sources",
+  "description": "Connect to APIs that provide real-time traffic data.",
   "task_type": "development",
   "task_role": "developer",
   "status": "pending",
@@ -19,7 +19,7 @@
     {
       "sequence_number": 1,
       "title": "Analyze requirements and plan implementation",
-      "description": "Ensure user data is stored securely in the database.",
+      "description": "Connect to APIs that provide real-time traffic data.",
       "status": "pending",
       "files_to_generate": [],
       "estimated_tokens": 1000,
@@ -31,7 +31,7 @@
     {
       "sequence_number": 2,
       "title": "Implement core functionality",
-      "description": "Implement Connect to Database",
+      "description": "Implement Integrate Traffic Data Sources",
       "status": "pending",
       "files_to_generate": [
         "server/src/**/*",

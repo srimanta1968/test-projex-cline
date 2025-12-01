@@ -1,8 +1,8 @@
 {
   "sequence_number": 16,
-  "task_id": "fc9baf87-989a-4a0b-a239-7f6c8d349af7",
-  "title": "Implement Feedback Submission API",
-  "description": "Develop API for submitting ride feedback.",
+  "task_id": "e52d9cd9-90ff-42f1-9530-3ef79d3ad3d0",
+  "title": "Implement Safety Protocols",
+  "description": "Develop safety features, such as driver background checks.",
   "task_type": "development",
   "task_role": "developer",
   "status": "pending",
@@ -19,7 +19,7 @@
     {
       "sequence_number": 1,
       "title": "Analyze requirements and plan implementation",
-      "description": "Develop API for submitting ride feedback.",
+      "description": "Develop safety features, such as driver background checks.",
       "status": "pending",
       "files_to_generate": [],
       "estimated_tokens": 1000,
@@ -31,7 +31,7 @@
     {
       "sequence_number": 2,
       "title": "Implement core functionality",
-      "description": "Implement Implement Feedback Submission API",
+      "description": "Implement Implement Safety Protocols",
       "status": "pending",
       "files_to_generate": [
         "server/src/**/*",

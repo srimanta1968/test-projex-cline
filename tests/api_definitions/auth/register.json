@@ -1,18 +1,18 @@
 {
   "endpoint": "/api/auth/register",
   "method": "POST",
-  "description": "Register a new user with email, username, and password. Returns auth tokens for auto-login.",
+  "description": "Register a new user with email, username, and password",
   "requiresAuth": false,
   "tags": ["auth", "user", "registration"],
   "testCases": [
     {
       "name": "Happy path - successful registration",
       "payload": {
-        "email": "testuser_12345@example.com",
-        "username": "testuser_12345",
-        "password": "SecurePass123!",
-        "first_name": "John",
-        "last_name": "Doe"
+        "email": "{{dynamic:email}}",
+        "username": "{{dynamic:username}}",
+        "password": "{{static:SecurePass123!}}",
+        "first_name": "{{static:John}}",
+        "last_name": "{{static:Doe}}"
       },
       "expectedStatus": 201,
       "expectedResponse": {
@@ -20,13 +20,13 @@
         "message": "User registered successfully",
         "data": {
           "user": {
-            "id": "uuid-format-id",
-            "email": "testuser_12345@example.com",
-            "username": "testuser_12345",
+            "id": "123e4567-e89b-12d3-a456-426614174000",
+            "email": "{{dynamic:email}}",
+            "username": "{{dynamic:username}}",
             "first_name": "John",
             "last_name": "Doe",
             "verified": false,
-            "created_at": "timestamp-format"
+            "created_at": "2024-01-15T10:30:00Z"
           },
           "tokens": {
             "accessToken": "jwt-token-format",

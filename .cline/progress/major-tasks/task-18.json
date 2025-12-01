@@ -1,8 +1,8 @@
 {
   "sequence_number": 18,
-  "task_id": "f20c30b3-08d6-4f28-822c-3d7a7a34ed3a",
-  "title": "Implement Messaging API",
-  "description": "Develop an API for sending and receiving messages.",
+  "task_id": "5addf7f9-f7be-4df0-bb1f-be6c3c81baea",
+  "title": "Design Referral Incentives",
+  "description": "Develop a strategy for user rewards through referrals.",
   "task_type": "development",
   "task_role": "developer",
   "status": "pending",
@@ -19,7 +19,7 @@
     {
       "sequence_number": 1,
       "title": "Analyze requirements and plan implementation",
-      "description": "Develop an API for sending and receiving messages.",
+      "description": "Develop a strategy for user rewards through referrals.",
       "status": "pending",
       "files_to_generate": [],
       "estimated_tokens": 1000,
@@ -31,7 +31,7 @@
     {
       "sequence_number": 2,
       "title": "Implement core functionality",
-      "description": "Implement Implement Messaging API",
+      "description": "Implement Design Referral Incentives",
       "status": "pending",
       "files_to_generate": [
         "server/src/**/*",

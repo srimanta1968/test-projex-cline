@@ -1,8 +1,8 @@
 {
   "sequence_number": 10,
-  "task_id": "ff0880dc-cf93-4e4f-be18-c2a7c56d581f",
-  "title": "Implement User Registration API",
-  "description": "Develop API for user registration and validation.",
+  "task_id": "5d8713e3-b11e-4a37-8a69-8066ab72c3b5",
+  "title": "Display Feedback to Admins",
+  "description": "Create an admin interface to view user feedback and ratings.",
   "task_type": "development",
   "task_role": "developer",
   "status": "pending",
@@ -19,7 +19,7 @@
     {
       "sequence_number": 1,
       "title": "Analyze requirements and plan implementation",
-      "description": "Develop API for user registration and validation.",
+      "description": "Create an admin interface to view user feedback and ratings.",
       "status": "pending",
       "files_to_generate": [],
       "estimated_tokens": 1000,
@@ -31,7 +31,7 @@
     {
       "sequence_number": 2,
       "title": "Implement core functionality",
-      "description": "Implement Implement User Registration API",
+      "description": "Implement Display Feedback to Admins",
       "status": "pending",
       "files_to_generate": [
         "server/src/**/*",

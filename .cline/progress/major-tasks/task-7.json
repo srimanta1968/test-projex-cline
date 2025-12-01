@@ -1,8 +1,8 @@
 {
   "sequence_number": 7,
-  "task_id": "240793b0-8819-408b-bf17-9efef87cd07a",
-  "title": "Integrate GPS Location Services",
-  "description": "Implement GPS functionality to fetch user's current location.",
+  "task_id": "d99e53ac-92c6-418d-b546-727ffccdbfb2",
+  "title": "Create User Notification for Costs",
+  "description": "Design notifications to inform users about their share of the ride cost.",
   "task_type": "development",
   "task_role": "developer",
   "status": "pending",
@@ -19,7 +19,7 @@
     {
       "sequence_number": 1,
       "title": "Analyze requirements and plan implementation",
-      "description": "Implement GPS functionality to fetch user's current location.",
+      "description": "Design notifications to inform users about their share of the ride cost.",
       "status": "pending",
       "files_to_generate": [],
       "estimated_tokens": 1000,
@@ -31,7 +31,7 @@
     {
       "sequence_number": 2,
       "title": "Implement core functionality",
-      "description": "Implement Integrate GPS Location Services",
+      "description": "Implement Create User Notification for Costs",
       "status": "pending",
       "files_to_generate": [
         "server/src/**/*",
